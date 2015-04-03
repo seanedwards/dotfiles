@@ -43,3 +43,8 @@ then
      export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
    }
 fi
+
+function st() {
+  osascript -e "tell application \"SourceTree\"" -e "open \"$(realpath $1)\"" -e "activate" -e "end tell"
+}
+
