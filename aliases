@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+function cls {
+  clear
+  if command -v toilet >/dev/null 2>&1; then
+    toilet -w `tput cols` "$HOST"
+  else
+    echo "Welcome to $HOST."
+  fi
+}
+
+function in {
+  pushd $1 > /dev/null && {
+    sh -c ${@:2}
+    popd > /dev/null
+  }
+}
+
+function aws-profile {
+  env $(ruby -e 'require "inifile"; print IniFile.load("#{ENV["HOME"]}/.aws/credentials")["'$1'"].map { |k, v| "#{k.upcase}=#{v}" }.join(" ")') ${@:2}
+}
+
+alias ls='ls -lhFAH --color=force'
+alias map='xargs -L1'
+alias tweet='t update'
+alias tweets='t timeline | less'
+alias fucking=sudo
+alias dc=popd
+
+if [[ "$PLATFORM" -eq "Darwin" ]]
+then
+  function setjdk() {
+    if [ $# -ne 0 ]; then
+       removeFromPath '/System/Library/Frameworks/JavaVM.framework/Home/bin'
+       if [ -n "${JAVA_HOME+x}" ]; then
+         removeFromPath $JAVA_HOME
+       fi
+       export JAVA_HOME=`/usr/libexec/java_home -v $@`
+       export PATH=$JAVA_HOME/bin:$PATH
+     fi
+   }
+   function removeFromPath() {
+     export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
+   }
+fi
