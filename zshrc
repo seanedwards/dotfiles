@@ -1,7 +1,14 @@
 # Path to your oh-my-zsh installation.
 export PLATFORM=`uname`
-ZTVPDIR="zsh-tmux-vim-pry"
+export ZTVPDIR="${HOME}/zsh-tmux-vim-pry"
 export ZSH="$ZTVPDIR/zsh/oh-my-zsh"
+
+read -r -d '' GOAT <<EOF
+(_(
+/_/'_____/)
+"  |      | <- Goatbutt.
+   |""""""|
+EOF
 
 PATH="~/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/usr/sbin:/sbin:$PATH"
 
@@ -14,8 +21,8 @@ then
   export AWS_DEFAULT_PROFILE="sandbox"
 
   #bindkey '\e[3~'         delete-char             # delete
-  bindkey '^[[1~'         beginning-of-line       # home
-  bindkey '^[[4~'         end-of-line             # end
+  #bindkey '^[[1~'         beginning-of-line       # home
+  #bindkey '^[[4~'         end-of-line             # end
   #bindkey '\e[1;5D'       backward-word           # ctrl-left
   #bindkey '\e[1;5C'       forward-word            # ctrl-right
 
@@ -35,6 +42,8 @@ fi
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="af-magic"
+#ZSH_THEME="agnoster"
+ZSH_CUSTOM="$ZSH/../custom"
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
@@ -53,6 +62,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Add wisely, as too many plugins slow down shell startup.
 
 plugins=(git ruby rvm aws bundler osx brew tmux)
+fpath=(/usr/local/share/zsh-completions $fpath)
 
 source "$ZSH/oh-my-zsh.sh"
 # source "$ZTVPDIR/tmuxinator.zsh"
@@ -79,8 +89,7 @@ if [ -e ~/.aliases ]; then
   source ~/.aliases
 fi
 
-cls
-
+goat
 
 # added by travis gem
 [ -f /Users/sedwards/.travis/travis.sh ] && source /Users/sedwards/.travis/travis.sh

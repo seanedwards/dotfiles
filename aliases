@@ -1,9 +1,23 @@
 #!/usr/bin/env bash
+alias urldecode='python -c "import sys, urllib as ul; \
+    print ul.unquote_plus(sys.argv[1])"'
+
+alias urlencode='python -c "import sys, urllib as ul; \
+    print ul.quote_plus(sys.argv[1])"'
+
+alias powerline-config="$ZTVPDIR/powerline/scripts/powerline-config --config-path $ZTVPDIR/powerline-config"
+alias powerline-render="$ZTVPDIR/powerline/scripts/powerline-config --config-path $ZTVPDIR/powerline-config"
+
+
+function goat {
+    echo $GOAT
+}
 
 function cls {
   clear
   if command -v toilet >/dev/null 2>&1; then
-    toilet -w `tput cols` "$HOST"
+    #toilet -w `tput cols` "$HOST"
+    goat
   else
     echo "Welcome to $HOST."
   fi
@@ -46,5 +60,25 @@ fi
 
 function st() {
   osascript -e "tell application \"SourceTree\"" -e "open \"$(realpath $1)\"" -e "activate" -e "end tell"
+}
+
+alias vbox=osascript -e 'tell application "VirtualBox" to activate'
+
+function google() {
+  osascript \
+    -e "tell application \"Google Chrome\"" \
+      -e "tell (make new window)" \
+        -e "set URL of active tab to \"http://google.com/search?q=$(urlencode "$1")\"" \
+      -e "end tell" \
+      -e "activate" \
+    -e "end tell"
+}
+
+function awsp() {
+  if [[ "$1" == "production" ]]
+    then RPROMPT=''
+    else RPROMPT=''
+  fi
+  export AWS_DEFAULT_PROFILE=$1
 }
 

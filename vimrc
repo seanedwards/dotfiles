@@ -1,4 +1,18 @@
-let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+let g:airline_powerline_fonts = 1
+
+let g:easytags_async = 1
+let g:easytags_events = ['BufWritePost']
+set tags=./.tags;
+let g:easytags_dynamic_files = 2
+
+let g:ycm_collect_identifiers_from_tags_files = 1
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsEditSplit="vertical"
+
+let s:path = $ZTVPDIR
 exec "source " . s:path . '/vim/bundle/vim-pathogen/autoload/pathogen.vim'
 exec pathogen#infect('bundle/{}', s:path . '/vim/bundle/{}')
 
@@ -20,6 +34,12 @@ set history=50    " keep 50 lines of command line history
 
 set incsearch ignorecase smartcase hlsearch
 :nmap \q :nohlsearch<CR>
+
+" Uncmment the following to have Vim jump to the last position when
+" reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
 set smartindent
 set expandtab tabstop=2 shiftwidth=2
