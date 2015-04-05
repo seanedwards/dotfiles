@@ -20,16 +20,6 @@ then
   export ANDROID_NDK_HOME="/usr/local/opt/android-ndk"
   export AWS_DEFAULT_PROFILE="sandbox"
 
-  #bindkey '\e[3~'         delete-char             # delete
-  #bindkey '^[[1~'         beginning-of-line       # home
-  #bindkey '^[[4~'         end-of-line             # end
-  #bindkey '\e[1;5D'       backward-word           # ctrl-left
-  #bindkey '\e[1;5C'       forward-word            # ctrl-right
-
-
-  #bindkey '^@'            history-incremental-search-backward     # ctrl-space
-  #bindkey '^[ '           history-beginning-search-backward       # ctrl-alt-space
-
   export DOCKER_HOST="tcp://`boot2docker ip 2> /dev/null`:2375"
   
 elif [[ "$PLATFORM" -eq "Linux" ]]
@@ -56,12 +46,14 @@ DISABLE_AUTO_UPDATE="true"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="yyyy-mm-dd"
 
+ZSH_TMUX_AUTOSTART="true"
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git ruby rvm aws bundler osx brew tmux)
+plugins=(git ruby rvm bundler osx tmux thor tmux urltools web-search wd)
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 source "$ZSH/oh-my-zsh.sh"
@@ -69,9 +61,7 @@ source "$ZSH/oh-my-zsh.sh"
 
 RPROMPT=''
 
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="/usr/local/man:$MANPATH"
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -93,8 +83,4 @@ goat
 
 # added by travis gem
 [ -f /Users/sedwards/.travis/travis.sh ] && source /Users/sedwards/.travis/travis.sh
-
-# If not running interactively, do not do anything
-[[ $- != *i* ]] && return
-[[ -z "$TMUX" ]] && exec tmux
 
