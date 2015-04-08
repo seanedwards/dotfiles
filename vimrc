@@ -12,8 +12,20 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 
-let g:airline_theme="bubblegum"
+let g:airline_theme="murmur"
 let g:airline#extensions#tabline#enabled = 1
+let g:tmuxline_preset = {
+  \ 'a': '#S',
+  \ 'b': '#F',
+  \ 'c': '#W',
+  \ 'win': ['#I', '#W'],
+  \ 'cwin': ['#I', '#W'],
+  \ 'x': ['#{battery_icon} #{battery_percentage}'],
+  \ 'y': ['%a', '%b %d', '%R'],
+  \ 'z': '#H' }
+
+let g:airline_solarized_bg = 'dark'
+let g:solarized_termcolors = 256
 
 " Setup some default ignores
 let g:ctrlp_custom_ignore = {
@@ -23,42 +35,83 @@ let g:ctrlp_custom_ignore = {
 
 let g:ctrlp_working_path_mode = 'r'
 
+let g:tmux_navigator_save_on_switch = 1
+
+let g:solarized_termtrans = 0
+
+let NERDTreeShowHidden=1
+
+let g:EasyMotion_do_mapping = 0
+
 let s:path = $ZTVPDIR
 exec "source " . s:path . '/vim/bundle/vim-pathogen/autoload/pathogen.vim'
 exec pathogen#infect('bundle/{}', s:path . '/vim/bundle/{}')
 
-set nocompatible ruler laststatus=2 showcmd showmode number 
-set clipboard=unnamed
-
 syntax on
 filetype plugin indent on
-let g:solarized_termtrans = 1
-"colorscheme solarized
-
-let g:tmux_navigator_save_on_switch = 1
 
 " allow backspacing over everything in insert mode
+set autoread
 set backspace=indent,eol,start
-set nobackup    " do not keep a backup file, use versions instead
-set history=50    " keep 50 lines of command line history
-set incsearch
+set clipboard=unnamed
+set expandtab
+set history=50
+set hlsearch
 set ignorecase
+set incsearch
+set laststatus=2
+set nobackup
+set nocompatible
+set number
+set ruler
+set shiftwidth=2
+set showcmd
+set showmode
 set smartcase
 set smartindent
-set hlsearch
-set expandtab
 set tabstop=2
-set shiftwidth=2
-set autoread
 
-nmap <leader>q :nohlsearch<CR>
-nmap <leader>p :CtrlP<cr>
+nnoremap <leader>sh :ScreenShell<cr>
+vnoremap <leader>sh :ScreenSend<cr>
+
 nmap <leader>bb :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
 nmap <leader>bs :CtrlPMRU<cr>
+nmap <leader>p :CtrlP<cr>
 
-nmap <leader>s :ScreenShell<cr>
-vmap <leader>s :ScreenSend<cr>
+nnoremap <leader>/ :nohlsearch<CR>
+nnoremap <leader>sW BvE
+nnoremap <leader>sl ^v$
+nnoremap <leader>sw bve
+
+map <leader><Up> <Plug>(easymotion-k)
+map <leader><Down> <Plug>(easymotion-j)
+map <leader><Left> <Plug>(easymotion-linebackward)
+map <leader><Right> <Plug>(easymotion-lineforward)
+map <leader>w <Plug>(easymotion-w)
+map <leader>b <Plug>(easymotion-b)
+map <leader>g <Plug>(easymotion-jumptoanywhere)
+
+vnoremap <leader>S y:execute @@<cr>
+nnoremap <leader>S ^vg_y:execute @@<cr>
+
+nmap <leader>tm :!t mentions<cr>
+nmap <leader>tt :!t timeline<cr>
+
+cmap w!! w !sudo tee % >/dev/null
+cmap ev e ~/.vimrc
+cmap et e ~/.tmux.conf
+
+nnoremap <leader>ga :Gwrite<cr>:GitGutter<cr>
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gc :Gcommit<cr>:GitGutter<cr>
+nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gr :Gread<cr>
+
+nnoremap u u:GitGutter<cr>
+nnoremap C-r C-r:GitGutter<cr>
+
+vmap a dO
 
 " Uncmment the following to have Vim jump to the last position when
 " reopening a file
@@ -76,12 +129,18 @@ if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gno
   set t_Co=256
 endif
 
-colors twilight256
+colors grb256
 
 map <F2> :NERDTreeToggle<CR>
+"autocmd VimEnter * NERDTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 map <leader>pbcopy "*y<CR>
 map <leader>pbpaste :set paste<CR>:put *<CR>:set nopaste<CR>
+
+:highlight ExtraWhitespace ctermbg=red guibg=red
+:match ExtraWhitespace /\s\+$/
 
 " Screen settings
 let g:ScreenImpl = 'Tmux'
@@ -89,7 +148,11 @@ let g:ScreenShellTmuxInitArgs = '-2'
 let g:ScreenShellQuitOnVimExit = 0
 command -nargs=? -complete=shellcmd W  :w | :call ScreenShellSend("load '".@%."';")
 
-if filereadable(".vimrc-local")
-  source .vimrc-local
-endif
+if filereadable("./.vimrc-local")
+  source ./.vimrc-local
+end
+
+if expand(".") != expand("~") && filereadable("~/.vimrc-local")
+  source ~/.vimrc-local
+end
 

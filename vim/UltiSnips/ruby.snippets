@@ -1,0 +1,25 @@
+snippet def "Ruby function" b
+# 
+#
+# @author `whoami`
+#
+# == Parameters:
+`!p snip.rv = '\n'.join(["# @param " + arg for arg in t[2].split(',')])`
+def ${1:func}(${2})
+	${VISUAL}$0
+end
+endsnippet
+
+snippet thor "Creates a Thor CLI class" b
+
+class ${1:Cli} < ${2:Thor}
+	# desc "command ARG", "executes command"
+	# option :opt # Adds --opt
+	# def command(arg)
+	#	  # Do stuff
+	# end
+	$0
+end
+
+endsnippet
+

@@ -10,7 +10,7 @@ read -r -d '' GOAT <<EOF
    |""""""|
 EOF
 
-PATH="~/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/usr/sbin:/sbin:$PATH"
+PATH="$ZTVPDIR/bin:~/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/usr/sbin:/sbin:$PATH"
 
 if [[ "$PLATFORM" -eq "Darwin" ]]
 then
@@ -21,18 +21,19 @@ then
   export AWS_DEFAULT_PROFILE="sandbox"
 
   export DOCKER_HOST="tcp://`boot2docker ip 2> /dev/null`:2375"
-  
+
 elif [[ "$PLATFORM" -eq "Linux" ]]
 then
-  PLUGINS= 
+  PLUGINS=
 fi
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
+#ZSH_THEME="af-magic"
+DEFAULT_USER=`whoami`
 ZSH_THEME="af-magic"
-#ZSH_THEME="agnoster"
 ZSH_CUSTOM="$ZSH/../custom"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -53,7 +54,7 @@ ZSH_TMUX_AUTOSTART="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git ruby rvm bundler osx tmux thor tmux urltools web-search wd)
+plugins=(git ruby rvm bundler osx tmux thor tmux web-search wd)
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 source "$ZSH/oh-my-zsh.sh"

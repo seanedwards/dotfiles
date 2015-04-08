@@ -1,13 +1,33 @@
 #!/usr/bin/env bash
-alias urldecode='python -c "import sys, urllib as ul; \
-    print ul.unquote_plus(sys.argv[1])"'
-
-alias urlencode='python -c "import sys, urllib as ul; \
-    print ul.quote_plus(sys.argv[1])"'
-
 alias powerline-config="$ZTVPDIR/powerline/scripts/powerline-config --config-path $ZTVPDIR/powerline-config"
 alias powerline-render="$ZTVPDIR/powerline/scripts/powerline-config --config-path $ZTVPDIR/powerline-config"
 
+function vpn {
+  /usr/bin/env osascript <<-EOF
+    tell application "System Events"
+      tell current location of network preferences
+        set VPN to service "Localytics $1 VPN"
+        if exists VPN then
+          if current configuration of VPN is not connected then
+            log "Connecting to $1..."
+            connect VPN
+            repeat while (current configuration of VPN is not connected)
+              delay 1
+            end repeat
+            log "Connected."
+          else
+            log "Disconnecting from $1..."
+            disconnect VPN
+            repeat while (current configuration of VPN is connected)
+              delay 1
+            end repeat
+            log "Disconnected."
+          end if
+        end if
+      end tell
+    end tell
+EOF
+}
 
 function goat {
     echo $GOAT
@@ -40,6 +60,7 @@ alias tweet='t update'
 alias tweets='t timeline | less'
 alias fucking=sudo
 alias dc=popd
+alias lls='ls | less'
 
 if [[ "$PLATFORM" -eq "Darwin" ]]
 then
@@ -61,8 +82,6 @@ fi
 function st() {
   osascript -e "tell application \"SourceTree\"" -e "open \"$(realpath $1)\"" -e "activate" -e "end tell"
 }
-
-alias vbox=osascript -e 'tell application "VirtualBox" to activate'
 
 function google() {
   osascript \
