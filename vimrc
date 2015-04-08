@@ -107,6 +107,7 @@ nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gc :Gcommit<cr>:GitGutter<cr>
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gr :Gread<cr>
+nnoremap <leader>gp :Gpush<cr>
 
 nnoremap u u:GitGutter<cr>
 nnoremap C-r C-r:GitGutter<cr>
