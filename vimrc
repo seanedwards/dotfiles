@@ -102,12 +102,13 @@ cmap w!! w !sudo tee % >/dev/null
 cmap ev e ~/.vimrc
 cmap et e ~/.tmux.conf
 
-nnoremap <leader>ga :Gwrite<cr>:GitGutter<cr>
-nnoremap <leader>gb :Gblame<cr>
-nnoremap <leader>gc :Gcommit<cr>:GitGutter<cr>
-nnoremap <leader>gs :Gstatus<cr>
-nnoremap <leader>gr :Gread<cr>
-nnoremap <leader>gp :Gpush<cr>
+noremap <leader>ga :Gwrite<cr>:GitGutter<cr>
+noremap <leader>gb :Gblame<cr>
+noremap <leader>gc :Gcommit<cr>:GitGutter<cr>
+noremap <leader>gs :Gstatus<cr>
+noremap <leader>gr :Gread<cr>
+noremap <leader>gp :Gpush<cr>
+noremap <leader>gd :Gdiff HEAD<cr>
 
 nnoremap u u:GitGutter<cr>
 nnoremap C-r C-r:GitGutter<cr>
