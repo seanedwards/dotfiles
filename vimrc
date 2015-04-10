@@ -32,8 +32,9 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
   \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
 \}
-
+let g:ctrlp_mruf_relative = 1
 let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_cmd = 'CtrlPMixed'
 
 let g:tmux_navigator_save_on_switch = 1
 
@@ -81,16 +82,15 @@ nmap <leader>p :CtrlP<cr>
 
 nnoremap <leader>/ :nohlsearch<CR>
 nnoremap <leader>sW BvE
-nnoremap <leader>sl ^v$
 nnoremap <leader>sw bve
 
-map <leader><Up> <Plug>(easymotion-k)
-map <leader><Down> <Plug>(easymotion-j)
-map <leader><Left> <Plug>(easymotion-linebackward)
+map <leader><Up>    <Plug>(easymotion-k)
+map <leader><Down>  <Plug>(easymotion-j)
+map <leader><Left>  <Plug>(easymotion-linebackward)
 map <leader><Right> <Plug>(easymotion-lineforward)
-map <leader>w <Plug>(easymotion-w)
-map <leader>b <Plug>(easymotion-b)
-map <leader>g <Plug>(easymotion-jumptoanywhere)
+map <leader>w       <Plug>(easymotion-w)
+map <leader>b       <Plug>(easymotion-b)
+map <leader>g       <Plug>(easymotion-jumptoanywhere)
 
 vnoremap <leader>S y:execute @@<cr>
 nnoremap <leader>S ^vg_y:execute @@<cr>
@@ -110,10 +110,20 @@ noremap <leader>gr :Gread<cr>
 noremap <leader>gp :Gpush<cr>
 noremap <leader>gd :Gdiff HEAD<cr>
 
+" RSpec.vim mappings
+noremap <Leader>rf :call RunCurrentSpecFile()<CR>
+noremap <Leader>rt :call RunNearestSpec()<CR>
+noremap <Leader>rl :call RunLastSpec()<CR>
+noremap <Leader>ra :call RunAllSpecs()<CR>
+noremap <Leader>ro :Copen<CR>
+let g:rspec_command = "Dispatch rspec {spec}"
+
 nnoremap u u:GitGutter<cr>
 nnoremap C-r C-r:GitGutter<cr>
 
-vmap a dO
+command! -nargs=? -complete=shellcmd Curl :r! curl -s <f-args>
+
+vmap <Return> di
 
 " Uncmment the following to have Vim jump to the last position when
 " reopening a file

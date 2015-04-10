@@ -58,9 +58,10 @@ plugins=(git ruby rvm bundler osx tmux thor tmux web-search wd)
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 source "$ZSH/oh-my-zsh.sh"
+RPS1='$(vi_mode_prompt_info)'
+RPROMPT='$(vi_mode_prompt_info) $(ruby_prompt_info)'
 # source "$ZTVPDIR/tmuxinator.zsh"
 
-RPROMPT=''
 
 export MANPATH="/usr/local/man:$MANPATH"
 
