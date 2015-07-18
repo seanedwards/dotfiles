@@ -71,6 +71,7 @@ set showmode
 set smartcase
 set smartindent
 set tabstop=2
+set autowriteall
 
 nnoremap <leader>sh :ScreenShell<cr>
 vnoremap <leader>sh :ScreenSend<cr>
@@ -99,8 +100,6 @@ nmap <leader>tm :!t mentions<cr>
 nmap <leader>tt :!t timeline<cr>
 
 cmap w!! w !sudo tee % >/dev/null
-cmap ev e ~/.vimrc
-cmap et e ~/.tmux.conf
 
 noremap <leader>ga :Gwrite<cr>:GitGutter<cr>
 noremap <leader>gb :Gblame<cr>
@@ -116,6 +115,10 @@ noremap <Leader>rt :call RunNearestSpec()<CR>
 noremap <Leader>rl :call RunLastSpec()<CR>
 noremap <Leader>ra :call RunAllSpecs()<CR>
 noremap <Leader>ro :Copen<CR>
+
+" Clojure mappings
+noremap <Leader>cr :Require<CR>
+
 let g:rspec_command = "Dispatch rspec {spec}"
 
 nnoremap u u:GitGutter<cr>
@@ -124,6 +127,8 @@ nnoremap C-r C-r:GitGutter<cr>
 command! -nargs=? -complete=shellcmd Curl :r! curl -s <f-args>
 
 vmap <Return> di
+
+autocmd QuickFixCmdPost *grep* cwindow
 
 " Uncmment the following to have Vim jump to the last position when
 " reopening a file
@@ -144,9 +149,7 @@ endif
 colors grb256
 
 map <F2> :NERDTreeToggle<CR>
-"autocmd VimEnter * NERDTree
 autocmd StdinReadPre * let s:std_in=1
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 map <leader>pbcopy "*y<CR>
 map <leader>pbpaste :set paste<CR>:put *<CR>:set nopaste<CR>

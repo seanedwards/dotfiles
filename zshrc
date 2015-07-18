@@ -10,8 +10,6 @@ read -r -d '' GOAT <<EOF
    |""""""|
 EOF
 
-PATH="$ZTVPDIR/bin:~/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/usr/sbin:/sbin:$PATH"
-
 if [[ "$PLATFORM" -eq "Darwin" ]]
 then
   PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
@@ -20,7 +18,7 @@ then
   export ANDROID_NDK_HOME="/usr/local/opt/android-ndk"
   export AWS_DEFAULT_PROFILE="sandbox"
 
-  export DOCKER_HOST="tcp://`boot2docker ip 2> /dev/null`:2375"
+  $(boot2docker shellinit 2> /dev/null)
 
 elif [[ "$PLATFORM" -eq "Linux" ]]
 then
@@ -47,7 +45,9 @@ DISABLE_AUTO_UPDATE="true"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="yyyy-mm-dd"
 
+if [[ -o login ]]; then
 ZSH_TMUX_AUTOSTART="true"
+fi
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -80,6 +80,8 @@ source "$ZTVPDIR/aliases"
 if [ -e ~/.aliases ]; then
   source ~/.aliases
 fi
+
+PATH="$ZTVPDIR/bin:~/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/usr/sbin:/sbin:$PATH"
 
 goat
 

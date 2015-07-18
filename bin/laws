@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+~/Work/cookbooks/laws/bin/laws "$@"
+

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 pushd $1 > /dev/null && {
-  sh -c "${@:2}"
+  eval "${@:2}"
   CMD_EXIT=$?
   popd > /dev/null
   exit $CMD_EXIT
