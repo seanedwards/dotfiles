@@ -1,6 +1,6 @@
 # Path to your oh-my-zsh installation.
 export PLATFORM=`uname`
-export ZTVPDIR="${HOME}/zsh-tmux-vim-pry"
+export ZTVPDIR="${HOME}/.dotfiles"
 export ZSH="$ZTVPDIR/zsh/oh-my-zsh"
 
 read -r -d '' GOAT <<EOF
@@ -46,7 +46,7 @@ DISABLE_AUTO_UPDATE="true"
 HIST_STAMPS="yyyy-mm-dd"
 
 if [[ -o login ]]; then
-ZSH_TMUX_AUTOSTART="true"
+  ZSH_TMUX_AUTOSTART="true"
 fi
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
@@ -54,7 +54,7 @@ fi
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git ruby rvm bundler osx tmux thor tmux web-search wd)
+plugins=(git ruby rbenv bundler osx tmux thor tmux web-search wd)
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 source "$ZSH/oh-my-zsh.sh"
