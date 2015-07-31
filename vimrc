@@ -73,9 +73,6 @@ set smartindent
 set tabstop=2
 set autowriteall
 
-nnoremap <leader>sh :ScreenShell<cr>
-vnoremap <leader>sh :ScreenSend<cr>
-
 nmap <leader>bb :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
 nmap <leader>bs :CtrlPMRU<cr>
@@ -158,10 +155,8 @@ map <leader>pbpaste :set paste<CR>:put *<CR>:set nopaste<CR>
 :match ExtraWhitespace /\s\+$/
 
 " Screen settings
-let g:ScreenImpl = 'Tmux'
-let g:ScreenShellTmuxInitArgs = '-2'
-let g:ScreenShellQuitOnVimExit = 0
-command -nargs=? -complete=shellcmd W  :w | :call ScreenShellSend("load '".@%."';")
+let g:slime_target = 'tmux'
+let g:slime_default_config = {"socket_name": "default", "target_pane": "2"}
 
 if filereadable("./.vimrc-local")
   source ./.vimrc-local
