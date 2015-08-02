@@ -44,7 +44,7 @@ let NERDTreeShowHidden=1
 
 let g:EasyMotion_do_mapping = 0
 
-let s:path = $ZTVPDIR
+let s:path = "~/.dotfiles"
 exec "source " . s:path . '/vim/bundle/vim-pathogen/autoload/pathogen.vim'
 exec pathogen#infect('bundle/{}', s:path . '/vim/bundle/{}')
 
@@ -72,6 +72,7 @@ set smartcase
 set smartindent
 set tabstop=2
 set autowriteall
+set exrc
 
 nmap <leader>bb :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
@@ -152,19 +153,12 @@ map <leader>pbcopy "*y<CR>
 map <leader>pbpaste :set paste<CR>:put *<CR>:set nopaste<CR>
 
 :highlight ExtraWhitespace ctermbg=red guibg=red
-:match ExtraWhitespace /\s\+$/
+:autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/ containedin=ALL
 
 " Screen settings
 let g:slime_target = 'tmux'
 let g:slime_default_config = {"socket_name": "default", "target_pane": "2"}
 
-if filereadable("./.vimrc-local")
-  source ./.vimrc-local
-end
-
-if expand(".") != expand("~") && filereadable("~/.vimrc-local")
-  source ~/.vimrc-local
-end
 
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 

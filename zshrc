@@ -72,10 +72,6 @@ else
   export EDITOR='vim'
 fi
 
-if [ -e ~/.zshrc-local ]; then
-  source ~/.zshrc-local
-fi
-
 source "$ZTVPDIR/aliases"
 if [ -e ~/.aliases ]; then
   source ~/.aliases
