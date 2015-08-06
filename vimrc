@@ -74,6 +74,7 @@ Plugin 'scrooloose/nerdtree' "                :: A tree explorer plugin for vim.
 Plugin 'kien/ctrlp.vim' "                     :: Fuzzy file, buffer, mru, tag, etc finder.                                                                            :: http://kien.github.com/ctrlp.vim
 Plugin 'Lokaltog/vim-easymotion' "            :: Vim motions on speed!                                                                                                :: https://github.com/easymotion/vim-easymotion
 Plugin 'godlygeek/tabular' "                  :: Vim script for text filtering and alignment                                                                          :: https://github.com/godlygeek/tabular
+Plugin 'tpope/vim-repeat' "                   :: repeat.vim: enable repeating supported plugin maps with '.'                                                          :: https://github.com/tpope/vim-repeat
 
 " Compile/test/shell tools
 Plugin 'tpope/vim-dispatch' "                 :: dispatch.vim: asynchronous build and test dispatcher                                                                 :: https://github.com/tpope/vim-dispatch
@@ -85,7 +86,6 @@ Plugin 'xolox/vim-easytags' "                 :: Automated tag file generation a
 Plugin 'SirVer/ultisnips' "                   :: UltiSnips - The ultimate snippet solution for Vim.                                                                   :: https://github.com/SirVer/ultisnips
 Plugin 'honza/vim-snippets' "                 :: vim-snipmate default snippets (Previously snipmate-snippets)                                                         :: https://github.com/honza/vim-snippets
 Plugin 'xolox/vim-notes' "                    :: Easy note taking in Vim                                                                                              :: http://peterodding.com/code/vim/notes/
-Plugin 'tpope/vim-repeat' "                   :: repeat.vim: enable repeating supported plugin maps with '.'                                                          :: https://github.com/tpope/vim-repeat
 
 " Plugin 'scrooloose/syntastic' "             :: Syntax checking hacks for vim                                                                                        :: https://github.com/scrooloose/syntastic
 Plugin 'majutsushi/tagbar' "                  :: Vim plugin that displays tags in a window, ordered by scope http://majutsushi.github.com/tagbar/                     :: https://github.com/majutsushi/tagbar
