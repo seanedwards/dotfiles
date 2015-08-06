@@ -74,6 +74,7 @@ Plugin 'tpope/vim-fugitive' "                 :: fugitive.vim: a Git wrapper so 
 
 " Motion/edit/navigation tools
 Plugin 'scrooloose/nerdtree' "                :: A tree explorer plugin for vim.                                                                                      :: https://github.com/scrooloose/nerdtree
+Plugin 'Xuyuanp/nerdtree-git-plugin' "        :: A plugin of NERDTree showing git status                                                                              :: https://github.com/Xuyuanp/nerdtree-git-plugin
 Plugin 'kien/ctrlp.vim' "                     :: Fuzzy file, buffer, mru, tag, etc finder.                                                                            :: http://kien.github.com/ctrlp.vim
 Plugin 'Lokaltog/vim-easymotion' "            :: Vim motions on speed!                                                                                                :: https://github.com/easymotion/vim-easymotion
 Plugin 'godlygeek/tabular' "                  :: Vim script for text filtering and alignment                                                                          :: https://github.com/godlygeek/tabular
@@ -233,5 +234,5 @@ function! s:CloseIfOnlyNerdTreeLeft()
   endif
 endfunction
 
-autocmd VimEnter * NERDTree | TagbarOpen
+autocmd VimEnter * NERDTree | wincmd p | TagbarOpen
 
