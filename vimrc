@@ -40,6 +40,9 @@ let g:tmux_navigator_save_on_switch = 1
 
 let g:solarized_termtrans = 0
 
+let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_frontmatter=1
+
 let NERDTreeShowHidden=1
 
 let g:EasyMotion_do_mapping = 0
@@ -133,6 +136,7 @@ set smartindent
 set tabstop=2
 set autowriteall
 set exrc
+set nofoldenable
 
 nmap <leader>bb :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
