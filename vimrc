@@ -69,10 +69,11 @@ Plugin 'edkolev/tmuxline.vim' "               :: Simple tmux statusline generato
 Plugin 'airblade/vim-gitgutter' "             :: A Vim plugin which shows a git diff in the gutter (sign column) and stages/reverts hunks.                            :: https://github.com/airblade/vim-gitgutter
 Plugin 'tpope/vim-fugitive' "                 :: fugitive.vim: a Git wrapper so awesome, it should be illegal                                                         :: https://github.com/tpope/vim-fugitive
 
-" Motion/navigation tools
+" Motion/edit/navigation tools
 Plugin 'scrooloose/nerdtree' "                :: A tree explorer plugin for vim.                                                                                      :: https://github.com/scrooloose/nerdtree
 Plugin 'kien/ctrlp.vim' "                     :: Fuzzy file, buffer, mru, tag, etc finder.                                                                            :: http://kien.github.com/ctrlp.vim
 Plugin 'Lokaltog/vim-easymotion' "            :: Vim motions on speed!                                                                                                :: https://github.com/easymotion/vim-easymotion
+Plugin 'godlygeek/tabular' "                  :: Vim script for text filtering and alignment                                                                          :: https://github.com/godlygeek/tabular
 
 " Compile/test/shell tools
 Plugin 'tpope/vim-dispatch' "                 :: dispatch.vim: asynchronous build and test dispatcher                                                                 :: https://github.com/tpope/vim-dispatch
@@ -88,7 +89,6 @@ Plugin 'tpope/vim-repeat' "                   :: repeat.vim: enable repeating su
 
 " Plugin 'scrooloose/syntastic' "             :: Syntax checking hacks for vim                                                                                        :: https://github.com/scrooloose/syntastic
 Plugin 'majutsushi/tagbar' "                  :: Vim plugin that displays tags in a window, ordered by scope http://majutsushi.github.com/tagbar/                     :: https://github.com/majutsushi/tagbar
-Plugin 'godlygeek/tabular' "                  :: Vim script for text filtering and alignment                                                                          :: https://github.com/godlygeek/tabular
 
 
 " Filetype plugins
