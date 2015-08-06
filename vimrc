@@ -44,6 +44,9 @@ let NERDTreeShowHidden=1
 
 let g:EasyMotion_do_mapping = 0
 
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+
 let s:path = "~/.dotfiles"
 
 set nocompatible
@@ -75,6 +78,8 @@ Plugin 'kien/ctrlp.vim' "                     :: Fuzzy file, buffer, mru, tag, e
 Plugin 'Lokaltog/vim-easymotion' "            :: Vim motions on speed!                                                                                                :: https://github.com/easymotion/vim-easymotion
 Plugin 'godlygeek/tabular' "                  :: Vim script for text filtering and alignment                                                                          :: https://github.com/godlygeek/tabular
 Plugin 'tpope/vim-repeat' "                   :: repeat.vim: enable repeating supported plugin maps with '.'                                                          :: https://github.com/tpope/vim-repeat
+Plugin 'tpope/vim-commentary' "               :: commentary.vim: comment stuff out                                                                                    :: https://github.com/tpope/vim-commentary
+Plugin 'Valloric/YouCompleteMe' "             :: A code-completion engine for Vim http://valloric.github.io/YouCompleteMe/                                            :: https://github.com/Valloric/YouCompleteMe
 
 " Compile/test/shell tools
 Plugin 'tpope/vim-dispatch' "                 :: dispatch.vim: asynchronous build and test dispatcher                                                                 :: https://github.com/tpope/vim-dispatch
@@ -86,17 +91,19 @@ Plugin 'xolox/vim-easytags' "                 :: Automated tag file generation a
 Plugin 'SirVer/ultisnips' "                   :: UltiSnips - The ultimate snippet solution for Vim.                                                                   :: https://github.com/SirVer/ultisnips
 Plugin 'honza/vim-snippets' "                 :: vim-snipmate default snippets (Previously snipmate-snippets)                                                         :: https://github.com/honza/vim-snippets
 Plugin 'xolox/vim-notes' "                    :: Easy note taking in Vim                                                                                              :: http://peterodding.com/code/vim/notes/
+Plugin 'mattn/gist-vim' "                     :: vimscript for gist                                                                                                   :: https://github.com/mattn/gist-vim
 
 " Plugin 'scrooloose/syntastic' "             :: Syntax checking hacks for vim                                                                                        :: https://github.com/scrooloose/syntastic
 Plugin 'majutsushi/tagbar' "                  :: Vim plugin that displays tags in a window, ordered by scope http://majutsushi.github.com/tagbar/                     :: https://github.com/majutsushi/tagbar
 
-
 " Filetype plugins
 Plugin 'plasticboy/vim-markdown' "            :: Markdown Vim Mode                                                                                                    :: http://plasticboy.com/markdown-vim-mode/
+Plugin 'tpope/vim-liquid' "                   :: Vim Liquid runtime files with Jekyll enhancements                                                                    :: https://github.com/tpope/vim-liquid
 Plugin 'derekwyatt/vim-scala' "               :: My work on integration of Scala into Vim - not a ton here, but useful for me. http://derekwyatt.org                  :: https://github.com/derekwyatt/vim-scala
 
 " Other plugins
 Plugin 'xolox/vim-misc' "                     :: Miscellaneous auto-load Vim scripts [for other xolox plugins]                                                        :: http://peterodding.com/code/vim/misc/
+Plugin 'mattn/webapi-vim' "                   :: vim interface to Web API http://www.vim.org/scripts/script.php?script_id=4019 [for vim-gist]                         :: https://github.com/mattn/webapi-vim
 
 call vundle#end()
 filetype plugin indent on
@@ -226,5 +233,5 @@ function! s:CloseIfOnlyNerdTreeLeft()
   endif
 endfunction
 
-autocmd VimEnter * NERDTree | wincmd p
+autocmd VimEnter * NERDTree | TagbarOpen
 
