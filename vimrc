@@ -45,11 +45,63 @@ let NERDTreeShowHidden=1
 let g:EasyMotion_do_mapping = 0
 
 let s:path = "~/.dotfiles"
-exec "source " . s:path . '/vim/bundle/vim-pathogen/autoload/pathogen.vim'
-exec pathogen#infect('bundle/{}', s:path . '/vim/bundle/{}')
+
+set nocompatible
+filetype off
+
+exec "set rtp+=" . s:path . "/vim/bundle/Vundle.vim"
+
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim' "                  :: Vundle, the plug-in manager for Vim                                                                                  :: http://github.com/VundleVim/Vundle.Vim
+
+" Make vim look cool
+Plugin 'bling/vim-airline' "                  :: lean & mean status/tabline for vim that's light as air                                                               :: https://github.com/bling/vim-airline
+Plugin 'flazz/vim-colorschemes' "             :: one colorscheme pack to rule them all!                                                                               :: https://github.com/flazz/vim-colorschemes
+
+" Make vim work well with tmux
+Plugin 'tmux-plugins/vim-tmux' "              :: vim plugin for tmux.conf                                                                                             :: https://github.com/tmux-plugins/vim-tmux
+Plugin 'tmux-plugins/vim-tmux-focus-events' " :: Make terminal vim and tmux work better together. (required for vim-gitgutter and vim-fugitive focus events)          :: https://github.com/tmux-plugins/vim-tmux-focus-events
+Plugin 'christoomey/vim-tmux-navigator' "     :: Seamless navigation between tmux panes and vim splits                                                                :: https://github.com/christoomey/vim-tmux-navigator
+Plugin 'edkolev/tmuxline.vim' "               :: Simple tmux statusline generator with support for powerline symbols and statusline / airline / lightline integration :: https://github.com/edkolev/tmuxline.vim
+
+" Make vim work with git
+Plugin 'airblade/vim-gitgutter' "             :: A Vim plugin which shows a git diff in the gutter (sign column) and stages/reverts hunks.                            :: https://github.com/airblade/vim-gitgutter
+Plugin 'tpope/vim-fugitive' "                 :: fugitive.vim: a Git wrapper so awesome, it should be illegal                                                         :: https://github.com/tpope/vim-fugitive
+
+" Motion/navigation tools
+Plugin 'scrooloose/nerdtree' "                :: A tree explorer plugin for vim.                                                                                      :: https://github.com/scrooloose/nerdtree
+Plugin 'kien/ctrlp.vim' "                     :: Fuzzy file, buffer, mru, tag, etc finder.                                                                            :: http://kien.github.com/ctrlp.vim
+Plugin 'Lokaltog/vim-easymotion' "            :: Vim motions on speed!                                                                                                :: https://github.com/easymotion/vim-easymotion
+
+" Compile/test/shell tools
+Plugin 'tpope/vim-dispatch' "                 :: dispatch.vim: asynchronous build and test dispatcher                                                                 :: https://github.com/tpope/vim-dispatch
+Plugin 'jpalardy/vim-slime' "                 :: A vim plugin to give you some slime. (Emacs) http://technotales.wordpress.com/2007/10/03/like-slime-for-vim/         :: https://github.com/jpalardy/vim-slime
+Plugin 'thoughtbot/vim-rspec' "               :: Run Rspec specs from Vim                                                                                             :: https://github.com/thoughtbot/vim-rspec
+Plugin 'xolox/vim-easytags' "                 :: Automated tag file generation and syntax highlighting of tags in Vim                                                 :: http://peterodding.com/code/vim/easytags/
+
+" Workflow tools
+Plugin 'SirVer/ultisnips' "                   :: UltiSnips - The ultimate snippet solution for Vim.                                                                   :: https://github.com/SirVer/ultisnips
+Plugin 'honza/vim-snippets' "                 :: vim-snipmate default snippets (Previously snipmate-snippets)                                                         :: https://github.com/honza/vim-snippets
+Plugin 'xolox/vim-notes' "                    :: Easy note taking in Vim                                                                                              :: http://peterodding.com/code/vim/notes/
+Plugin 'tpope/vim-repeat' "                   :: repeat.vim: enable repeating supported plugin maps with '.'                                                          :: https://github.com/tpope/vim-repeat
+
+" Plugin 'scrooloose/syntastic' "             :: Syntax checking hacks for vim                                                                                        :: https://github.com/scrooloose/syntastic
+Plugin 'majutsushi/tagbar' "                  :: Vim plugin that displays tags in a window, ordered by scope http://majutsushi.github.com/tagbar/                     :: https://github.com/majutsushi/tagbar
+Plugin 'godlygeek/tabular' "                  :: Vim script for text filtering and alignment                                                                          :: https://github.com/godlygeek/tabular
+
+
+" Filetype plugins
+Plugin 'plasticboy/vim-markdown' "            :: Markdown Vim Mode                                                                                                    :: http://plasticboy.com/markdown-vim-mode/
+Plugin 'derekwyatt/vim-scala' "               :: My work on integration of Scala into Vim - not a ton here, but useful for me. http://derekwyatt.org                  :: https://github.com/derekwyatt/vim-scala
+
+" Other plugins
+Plugin 'xolox/vim-misc' "                     :: Miscellaneous auto-load Vim scripts [for other xolox plugins]                                                        :: http://peterodding.com/code/vim/misc/
+
+call vundle#end()
+filetype plugin indent on
 
 syntax on
-filetype plugin indent on
 
 " allow backspacing over everything in insert mode
 set autoread
