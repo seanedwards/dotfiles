@@ -238,5 +238,5 @@ function! s:CloseIfOnlyNerdTreeLeft()
   endif
 endfunction
 
-autocmd VimEnter * NERDTree | wincmd p | TagbarOpen
+autocmd VimEnter * NERDTree | wincmd p
 
