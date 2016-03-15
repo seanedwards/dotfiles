@@ -6,7 +6,7 @@ export ZSH="$ZTVPDIR/zsh/oh-my-zsh"
 read -r -d '' GOAT <<EOF
 (_(
 /_/'_____/)
-"  |      | <- Goatbutt.
+"  |      |
    |""""""|
 EOF
 
@@ -84,3 +84,10 @@ goat
 # added by travis gem
 [ -f /Users/sedwards/.travis/travis.sh ] && source /Users/sedwards/.travis/travis.sh
 
+# Cloudheath
+export AUTH0_SECRET=15525a96730bfd8725d34652351d6aab1a200dc668a5d2b298ba4b8bc970acbe
+
+
+
+# added by travis gem
+[ -f /Users/edwards/.travis/travis.sh ] && source /Users/edwards/.travis/travis.sh

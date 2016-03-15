@@ -44,6 +44,7 @@ let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_frontmatter=1
 
 let NERDTreeShowHidden=1
+let NERDTreeIgnore = ['^.tags$']
 
 let g:EasyMotion_do_mapping = 0
 
@@ -83,7 +84,8 @@ Plugin 'Lokaltog/vim-easymotion' "            :: Vim motions on speed!          
 Plugin 'godlygeek/tabular' "                  :: Vim script for text filtering and alignment                                                                          :: https://github.com/godlygeek/tabular
 Plugin 'tpope/vim-repeat' "                   :: repeat.vim: enable repeating supported plugin maps with '.'                                                          :: https://github.com/tpope/vim-repeat
 Plugin 'tpope/vim-commentary' "               :: commentary.vim: comment stuff out                                                                                    :: https://github.com/tpope/vim-commentary
-Plugin 'Valloric/YouCompleteMe' "             :: A code-completion engine for Vim http://valloric.github.io/YouCompleteMe/                                            :: https://github.com/Valloric/YouCompleteMe
+Plugin 'tpope/vim-surround'
+"Plugin 'Valloric/YouCompleteMe' "             :: A code-completion engine for Vim http://valloric.github.io/YouCompleteMe/                                            :: https://github.com/Valloric/YouCompleteMe
 
 " Compile/test/shell tools
 Plugin 'tpope/vim-dispatch' "                 :: dispatch.vim: asynchronous build and test dispatcher                                                                 :: https://github.com/tpope/vim-dispatch
@@ -137,6 +139,7 @@ set tabstop=2
 set autowriteall
 set exrc
 set nofoldenable
+set noswapfile
 
 nmap <leader>bb :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
@@ -211,6 +214,7 @@ endif
 colors grb256
 
 map <F2> :NERDTreeToggle<CR>
+map <F3> :TagbarToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 
 map <leader>pbcopy "*y<CR>
