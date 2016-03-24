@@ -16,8 +16,8 @@ function cls {
   fi
 }
 
-function aws-profile {
-  env $(ruby -e 'require "inifile"; print IniFile.load("#{ENV["HOME"]}/.aws/credentials")["'$1'"].map { |k, v| "#{k.upcase}=#{v}" }.join(" ")') ${@:2}
+function awsp {
+  $(aws-profile $1)
 }
 
 alias ls='ls -lhFAH --color=force'
@@ -44,14 +44,6 @@ then
      export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
    }
 fi
-
-function awsp() {
-  if [[ "$1" == "production" ]]
-    then RPROMPT=''
-    else RPROMPT=''
-  fi
-  export AWS_DEFAULT_PROFILE=$1
-}
 
 alias fuck='$(thefuck $(fc -ln -1))'
 

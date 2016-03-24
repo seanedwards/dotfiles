@@ -53,12 +53,12 @@ fi
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git ruby rbenv bundler osx tmux thor tmux web-search wd aws)
+plugins=(git ruby rbenv bundler osx tmux thor tmux web-search wd)
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 source "$ZSH/oh-my-zsh.sh"
 RPS1='$(vi_mode_prompt_info)'
-RPROMPT='<ruby:$(ruby_prompt_info)> <aws:$(agp)>'
+RPROMPT='<ruby:$(ruby_prompt_info)> <aws:$(aws-profile)>'
 # source "$ZTVPDIR/tmuxinator.zsh"
 
 export MANPATH="/usr/local/man:$MANPATH"
@@ -79,8 +79,8 @@ PATH="$ZTVPDIR/bin:~/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/usr/sbin
 
 goat
 
-# added by travis gem
-[ -f /Users/sedwards/.travis/travis.sh ] && source /Users/sedwards/.travis/travis.sh
+unset AWS_DEFAULT_PROFILE
+export AWS_REGION=us-east-1
 
-# added by travis gem
-[ -f /Users/edwards/.travis/travis.sh ] && source /Users/edwards/.travis/travis.sh
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local

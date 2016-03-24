@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+def load_gem(name, version=nil)
+  # needed if your ruby version is less than 1.9
+  require 'rubygems'
+
+  begin
+    gem name, version
+  rescue LoadError
+    version = "--version '#{version}'" unless version.nil?
+    system("gem install #{name} #{version}")
+    Gem.clear_paths
+    retry
+  end
+
+  require name
+end
+
+def default_color(profile_name)
+  case profile_name
+  when /.*prod.*/
+    'red'
+  when /.*(dev|sandbox).*/
+    'green'
+  else
+    'yellow'
+  end
+end
+
+load_gem 'inifile'
+
+profile_name = ARGV[0] || ENV['AWS_PROFILE'] || ENV['AWS_DEFAULT_PROFILE'] || 'default'
+
+profiles = IniFile.load("#{ENV['AWS_HOME'] || ENV['HOME'] + '/.aws'}/credentials", default: '_default')
+
+if ARGV.empty?
+  if profiles.has_section?(profile_name)
+    profile_color = profiles[profile_name]['color'] || default_color(profile_name)
+    print "%F{#{profile_color}}#{profile_name}%f"
+  else
+    print "%F{black}UNSET%f"
+  end
+else
+  raise "Invalid profile #{profile_name}." unless profiles.has_section?(profile_name)
+  puts "export AWS_PROFILE=#{profile_name}"
+  puts "export AWS_REGION=#{profiles[profile_name]['region']}"
+end
+
