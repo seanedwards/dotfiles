@@ -37,7 +37,7 @@ if ARGV.empty?
     profile_color = profiles[profile_name]['color'] || default_color(profile_name)
     print "%F{#{profile_color}}#{profile_name}%f"
   else
-    print "%F{black}UNSET%f"
+    print "%F{8}UNSET%f"
   end
 else
   raise "Invalid profile #{profile_name}." unless profiles.has_section?(profile_name)
