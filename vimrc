@@ -64,6 +64,7 @@ Plugin 'gmarik/Vundle.vim' "                  :: Vundle, the plug-in manager for
 
 " Make vim look cool
 Plugin 'bling/vim-airline' "                  :: lean & mean status/tabline for vim that's light as air                                                               :: https://github.com/bling/vim-airline
+Plugin 'vim-airline/vim-airline-themes' "                  :: lean & mean status/tabline for vim that's light as air                                                               :: https://github.com/bling/vim-airline
 Plugin 'flazz/vim-colorschemes' "             :: one colorscheme pack to rule them all!                                                                               :: https://github.com/flazz/vim-colorschemes
 
 " Make vim work well with tmux
