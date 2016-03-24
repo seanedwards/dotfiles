@@ -16,7 +16,6 @@ then
   export M3_HOME="/usr/local"
   export ANDROID_HOME="/usr/local/opt/android-sdk"
   export ANDROID_NDK_HOME="/usr/local/opt/android-ndk"
-  export AWS_DEFAULT_PROFILE="sandbox"
 
   $(boot2docker shellinit 2> /dev/null)
 
@@ -54,14 +53,13 @@ fi
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git ruby rbenv bundler osx tmux thor tmux web-search wd)
+plugins=(git ruby rbenv bundler osx tmux thor tmux web-search wd aws)
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 source "$ZSH/oh-my-zsh.sh"
 RPS1='$(vi_mode_prompt_info)'
-RPROMPT='$(vi_mode_prompt_info) $(ruby_prompt_info)'
+RPROMPT='<ruby:$(ruby_prompt_info)> <aws:$(agp)>'
 # source "$ZTVPDIR/tmuxinator.zsh"
-
 
 export MANPATH="/usr/local/man:$MANPATH"
 
@@ -83,11 +81,6 @@ goat
 
 # added by travis gem
 [ -f /Users/sedwards/.travis/travis.sh ] && source /Users/sedwards/.travis/travis.sh
-
-# Cloudheath
-export AUTH0_SECRET=15525a96730bfd8725d34652351d6aab1a200dc668a5d2b298ba4b8bc970acbe
-
-
 
 # added by travis gem
 [ -f /Users/edwards/.travis/travis.sh ] && source /Users/edwards/.travis/travis.sh
