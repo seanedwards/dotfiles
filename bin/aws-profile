@@ -1,18 +1,29 @@
 #!/usr/bin/env ruby
-def load_gem(name, version=nil)
-  # needed if your ruby version is less than 1.9
-  require 'rubygems'
 
+def load_gem(name, version=nil)
   begin
     gem name, version
   rescue LoadError
-    version = "--version '#{version}'" unless version.nil?
-    system("gem install #{name} #{version}")
-    Gem.clear_paths
-    retry
+    $stderr.puts "Please run `gem install #{name}` before using this script."
+    exit 0
   end
 
   require name
+end
+
+load_gem 'aws-sdk-core'
+require 'yaml'
+
+class String
+  def black;          "%F{black}#{self}%f" end
+  def red;            "%F{red}#{self}%f" end
+  def green;          "%F{green}#{self}%f" end
+  def brown;          "%F{brown}#{self}%f" end
+  def blue;           "%F{blue}#{self}%f" end
+  def magenta;        "%F{magenta}#{self}%f" end
+  def cyan;           "%F{cyan}#{self}%f" end
+  def gray;           "%F{gray}#{self}%f" end
+  def yellow;         "%F{yellow}#{self}%f" end
 end
 
 def default_color(profile_name)
@@ -21,27 +32,110 @@ def default_color(profile_name)
     'red'
   when /.*(dev|sandbox).*/
     'green'
+  when /.*(test|staging).*/
+    'blue'
   else
     'yellow'
   end
 end
 
-load_gem 'inifile'
+def profile_rprompt(profile_name)
+  if profile = PROFILES[profile_name]
+    profile_name.send(profile['color'] || default_color(profile_name) || 'gray')
+  else
+    "UNSET".gray
+  end
+end
+
+def set_or_unset(env, val)
+  if val
+    "export #{env}=#{val}"
+  else
+    "unset #{env}"
+  end
+end
+
+def parse_ini(string)
+  ret = {}
+  section = {}
+  string.lines.each do |line|
+    case line
+    when /\s*\[(.*)\]\s*(;.*)?/
+      section = {}
+      ret[$1.strip] = section
+    when /(.*?)=(.*)(;.*)?/
+      key = $1.dup
+      val = $2.dup
+      section[key.strip.gsub(/^aws_/, '').to_sym] = val.strip
+    end
+  end
+  ret
+end
+
+def mfa_prompt(profile_name)
+  $stderr.print "Enter MFA Code for #{profile_name}: "
+  STDOUT.flush
+  $stdin.gets.chomp
+end
 
 profile_name = ARGV[0] || ENV['AWS_PROFILE'] || ENV['AWS_DEFAULT_PROFILE'] || 'default'
+credentials_file = "#{ENV['AWS_HOME'] || ENV['HOME'] + '/.aws'}/credentials"
+sessions_file = "#{ENV['AWS_HOME'] || ENV['HOME'] + '/.aws'}/sessions"
 
-profiles = IniFile.load("#{ENV['AWS_HOME'] || ENV['HOME'] + '/.aws'}/credentials", default: '_default')
+PROFILES = parse_ini(File.read(credentials_file))
+SESSIONS = YAML.load(File.read(sessions_file)) || {} rescue {}
 
-if ARGV.empty?
-  if profiles.has_section?(profile_name)
-    profile_color = profiles[profile_name]['color'] || default_color(profile_name)
-    print "%F{#{profile_color}}#{profile_name}%f"
-  else
-    print "%F{8}UNSET%f"
+def load_credentials(profile_name)
+  profile = PROFILES[profile_name] || raise("No such profile #{profile_name}")
+
+  if session = SESSIONS[profile_name]
+    if (Time.now.to_i + 5 * 60) > session[:expiration].to_i
+      session = nil
+    end
   end
-else
-  raise "Invalid profile #{profile_name}." unless profiles.has_section?(profile_name)
-  puts "export AWS_PROFILE=#{profile_name}"
-  puts "export AWS_REGION=#{profiles[profile_name]['region']}"
+
+  if session.nil?
+    if source_profile = profile[:source_profile]
+      source_creds = load_credentials(source_profile)
+      sts = Aws::STS::Client.new(source_creds.select { |k, v| [:access_key_id, :secret_access_key, :session_token].include?(k) })
+
+      role_credentials_options = {
+        role_session_name: [*('A'..'Z')].sample(16).join,
+        role_arn: profile[:role_arn]
+      }
+
+      if profile[:mfa_serial]
+        role_credentials_options[:serial_number] ||= profile[:mfa_serial]
+        role_credentials_options[:token_code] ||= mfa_prompt(source_profile)
+      end
+
+      session_creds = sts.assume_role(role_credentials_options).credentials.to_h
+      session_creds[:region] ||= source_creds[:region]
+
+      SESSIONS[profile_name] = session_creds
+    else
+      if profile[:mfa_serial]
+        sts = Aws::STS::Client.new(profile.select { |k, v| [:access_key_id, :secret_access_key, :session_token].include?(k) })
+        session_creds = sts.get_session_token(serial_number: profile[:mfa_serial], token_code: mfa_prompt(profile_name)).credentials.to_h
+        session_creds[:region] ||= profile[:region]
+        SESSIONS[profile_name] = session_creds
+      else
+        profile
+      end
+    end
+  else
+    session
+  end
 end
+
+creds = load_credentials(profile_name)
+
+File.write(sessions_file, YAML.dump(SESSIONS))
+
+puts set_or_unset("AWS_DEFAULT_PROFILE", profile_name)
+puts set_or_unset("AWS_DEFAULT_REGION", creds[:region])
+puts set_or_unset("AWS_ACCESS_KEY_ID", creds[:access_key_id])
+puts set_or_unset("AWS_SECRET_ACCESS_KEY", creds[:secret_access_key])
+puts set_or_unset("AWS_SESSION_TOKEN", creds[:session_token])
+puts set_or_unset("AWS_RPROMPT", profile_rprompt(profile_name))
 
