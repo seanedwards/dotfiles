@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+read -d '' APPLE_SCRIPT <<EOF
+tell application "Google Chrome"
+set myTab to make new tab at end of tabs of window 1
+activate
+end tell
+EOF
+
+osascript -e "$APPLE_SCRIPT"
+
