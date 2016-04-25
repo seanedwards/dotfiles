@@ -58,7 +58,7 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 
 source "$ZSH/oh-my-zsh.sh"
 RPS1='$(vi_mode_prompt_info)'
-RPROMPT='<ruby:$(ruby_prompt_info)> <aws:$(aws-profile)>'
+RPROMPT='<ruby:$(ruby_prompt_info)> <aws:$AWS_RPROMPT>'
 # source "$ZTVPDIR/tmuxinator.zsh"
 
 export MANPATH="/usr/local/man:$MANPATH"
