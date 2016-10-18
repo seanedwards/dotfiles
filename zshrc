@@ -1,6 +1,7 @@
 # Path to your oh-my-zsh installation.
 export PLATFORM=`uname`
 export ZTVPDIR="${HOME}/.dotfiles"
+export ZPLUG_HOME="${ZTVPDIR}/zsh/zplug"
 export ZSH="$ZTVPDIR/zsh/oh-my-zsh"
 
 read -r -d '' GOAT <<EOF
@@ -48,17 +49,35 @@ if [[ -o login ]]; then
   ZSH_TMUX_AUTOSTART="true"
 fi
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
+source "${ZPLUG_HOME}/init.zsh"
 
-plugins=(git mercurial ruby rbenv bundler osx tmux wd)
+zplug "robbyrussell/oh-my-zsh", use:"lib/*", nice:-1
+zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting", nice:10
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/mercurial", from:oh-my-zsh
+zplug "plugins/ruby", from:oh-my-zsh
+zplug "plugins/rbenv", from:oh-my-zsh
+zplug "plugins/bundler", from:oh-my-zsh
+zplug "plugins/osx", from:oh-my-zsh
+zplug "plugins/tmux", from:oh-my-zsh
+zplug "plugins/wd", from:oh-my-zsh
+zplug "themes/af-magic", from:oh-my-zsh
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+zplug load
+
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-source "$ZSH/oh-my-zsh.sh"
-source "$ZTVPDIR/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
-bindkey '^ ' autosuggest-accept
+#source "$ZSH/oh-my-zsh.sh"
 
 RPS1='$(vi_mode_prompt_info)'
 # source "$ZTVPDIR/tmuxinator.zsh"
