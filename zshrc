@@ -53,13 +53,36 @@ fi
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git ruby rbenv bundler osx tmux thor tmux web-search wd)
+plugins=(git mercurial ruby rbenv bundler osx tmux wd)
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 source "$ZSH/oh-my-zsh.sh"
+source "$ZTVPDIR/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+bindkey '^ ' autosuggest-accept
+
 RPS1='$(vi_mode_prompt_info)'
-RPROMPT='<ruby:$(ruby_prompt_info)> <aws:$AWS_RPROMPT>'
 # source "$ZTVPDIR/tmuxinator.zsh"
+
+# hg settings
+ZSH_THEME_HG_PROMPT_PREFIX="$FG[075](hg branch:"
+ZSH_THEME_HG_PROMPT_SUFFIX="$FG[075])%{$reset_color%}"
+ZSH_THEME_HG_PROMPT_DIRTY="$my_orange*%{$reset_color%}"
+ZSH_THEME_HG_PROMPT_CLEAN=""
+
+# git settings
+ZSH_THEME_GIT_PROMPT_PREFIX="$FG[075](git branch:"
+ZSH_THEME_GIT_PROMPT_CLEAN=""
+ZSH_THEME_GIT_PROMPT_DIRTY="$my_orange*%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="$FG[075])%{$reset_color%}"
+
+# primary prompt
+PROMPT='$FG[237]------------------------------------------------------------%{$reset_color%}
+$FG[032]%~\
+$(git_prompt_info)$(hg_prompt_info) \
+$FG[105]%(!.#.»)%{$reset_color%} '
+
+RPROMPT='<ruby:$(ruby_prompt_info)> <aws:$AWS_RPROMPT>'
+PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
 
 export MANPATH="/usr/local/man:$MANPATH"
 

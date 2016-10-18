@@ -1,9 +1,9 @@
 let g:airline_powerline_fonts = 1
 
-let g:easytags_async = 1
-let g:easytags_events = ['BufWritePost']
-set tags=./.tags;
-let g:easytags_dynamic_files = 2
+"let g:easytags_async = 1
+"let g:easytags_events = ['BufWritePost']
+"set tags=./.tags;
+"let g:easytags_dynamic_files = 2
 
 let g:ycm_collect_identifiers_from_tags_files = 1
 
@@ -191,6 +191,7 @@ nnoremap u u:GitGutter<cr>
 nnoremap C-r C-r:GitGutter<cr>
 
 command! -nargs=? -complete=shellcmd Curl :r! curl -s <f-args>
+command! -nargs=1 Pwgen :r! pwgen <f-args> 1
 
 vmap <Return> di
 
