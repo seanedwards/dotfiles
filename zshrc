@@ -92,16 +92,16 @@ function precmd() {
   fi
 }
 
-function aws_default_profile() {
-  ${AWS_DEFAULT_PROFILE}
-}
 function aws_prompt_info() {
   case $AWS_DEFAULT_PROFILE in
   *dev*)
-    echo %F{green}$(aws_default_profile)%f
+    echo %F{green}${AWS_DEFAULT_PROFILE}%f
+    ;;
+  *prod*)
+    echo %F{red}${AWS_DEFAULT_PROFILE}%f
     ;;
   *)
-    echo $(aws_default_profile)
+    echo %F{yellow}${AWS_DEFAULT_PROFILE}%f
     ;;
   esac
 }
@@ -111,7 +111,7 @@ function render_prompt() {
   LAST_CMD_STATUS="exit ${?} in ${LAST_CMD_TIME}s"
 cat << EOM
 %U${(l:COLUMNS:: :)LAST_CMD_STATUS}%u
-$FG[240][ ruby: $(ruby_prompt_info) | aws: ${AWS_RPROMPT} $FG[240]]
+$FG[240][ ruby: $(ruby_prompt_info) | aws: $(aws_prompt_info) $FG[240]]
 $FG[240]$FG[032]%~$FG[105] $(git_prompt_info)$(hg_prompt_info)$ %{$reset_color%}
 EOM
 }
