@@ -12,7 +12,6 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 
-let g:airline_theme="murmur"
 let g:airline#extensions#tabline#enabled = 1
 let g:tmuxline_preset = {
   \ 'a': '#S',
@@ -23,9 +22,6 @@ let g:tmuxline_preset = {
   \ 'x': ['#{battery_icon} #{battery_percentage}'],
   \ 'y': ['%a', '%b %d', '%R'],
   \ 'z': '#H' }
-
-let g:airline_solarized_bg = 'dark'
-let g:solarized_termcolors = 256
 
 " Setup some default ignores
 let g:ctrlp_custom_ignore = {
@@ -66,6 +62,7 @@ Plugin 'gmarik/Vundle.vim' "                  :: Vundle, the plug-in manager for
 Plugin 'bling/vim-airline' "                  :: lean & mean status/tabline for vim that's light as air                                                               :: https://github.com/bling/vim-airline
 Plugin 'vim-airline/vim-airline-themes' "                  :: lean & mean status/tabline for vim that's light as air                                                               :: https://github.com/bling/vim-airline
 Plugin 'flazz/vim-colorschemes' "             :: one colorscheme pack to rule them all!                                                                               :: https://github.com/flazz/vim-colorschemes
+Plugin 'altercation/vim-colors-solarized'
 
 " Make vim work well with tmux
 Plugin 'tmux-plugins/vim-tmux' "              :: vim plugin for tmux.conf                                                                                             :: https://github.com/tmux-plugins/vim-tmux
@@ -86,6 +83,7 @@ Plugin 'godlygeek/tabular' "                  :: Vim script for text filtering a
 Plugin 'tpope/vim-repeat' "                   :: repeat.vim: enable repeating supported plugin maps with '.'                                                          :: https://github.com/tpope/vim-repeat
 Plugin 'tpope/vim-commentary' "               :: commentary.vim: comment stuff out                                                                                    :: https://github.com/tpope/vim-commentary
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-sensible'
 "Plugin 'Valloric/YouCompleteMe' "             :: A code-completion engine for Vim http://valloric.github.io/YouCompleteMe/                                            :: https://github.com/Valloric/YouCompleteMe
 
 " Compile/test/shell tools
@@ -115,28 +113,32 @@ Plugin 'mattn/webapi-vim' "                   :: vim interface to Web API http:/
 call vundle#end()
 filetype plugin indent on
 
-syntax on
+syntax enable
+set background=dark
+let g:airline_theme="solarized"
+let g:airline_solarized_bg = 'dark'
+let g:solarized_termcolors=16
+let g:solarized_visibility = "high"
+let g:solarized_contrast = "high"
+let g:solarized_termtrans = 1
+colors solarized
 
 " allow backspacing over everything in insert mode
 set autoread
-set backspace=indent,eol,start
 set clipboard=unnamed
 set expandtab
-set history=50
 set hlsearch
 set ignorecase
-set incsearch
 set laststatus=2
 set nobackup
 set nocompatible
 set number
-set ruler
 set shiftwidth=2
+set tabstop=2
 set showcmd
 set showmode
 set smartcase
 set smartindent
-set tabstop=2
 set autowriteall
 set exrc
 set nofoldenable
@@ -208,12 +210,6 @@ endif
 if has('mouse')
   set mouse=a
 endif
-
-if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
-  set t_Co=256
-endif
-
-colors grb256
 
 map <F2> :NERDTreeToggle<CR>
 map <F3> :TagbarToggle<CR>

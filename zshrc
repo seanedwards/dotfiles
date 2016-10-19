@@ -2,7 +2,6 @@
 export PLATFORM=`uname`
 export ZTVPDIR="${HOME}/.dotfiles"
 export ZPLUG_HOME="${ZTVPDIR}/zsh/zplug"
-export ZSH="$ZTVPDIR/zsh/oh-my-zsh"
 
 read -r -d '' GOAT <<EOF
 (_(
@@ -29,10 +28,7 @@ fi
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-#ZSH_THEME="af-magic"
 DEFAULT_USER=`whoami`
-ZSH_THEME="af-magic"
-ZSH_CUSTOM="$ZSH/../custom"
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
@@ -63,6 +59,8 @@ zplug "plugins/bundler", from:oh-my-zsh
 zplug "plugins/osx", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/wd", from:oh-my-zsh
+
+zplug "lib/theme-and-appearance", from:oh-my-zsh
 zplug "themes/af-magic", from:oh-my-zsh
 
 # Install plugins if there are plugins that have not been installed
@@ -82,26 +80,45 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 RPS1='$(vi_mode_prompt_info)'
 # source "$ZTVPDIR/tmuxinator.zsh"
 
-# hg settings
-ZSH_THEME_HG_PROMPT_PREFIX="$FG[075](hg branch:"
-ZSH_THEME_HG_PROMPT_SUFFIX="$FG[075])%{$reset_color%}"
-ZSH_THEME_HG_PROMPT_DIRTY="$my_orange*%{$reset_color%}"
-ZSH_THEME_HG_PROMPT_CLEAN=""
+function preexec() {
+  timer=${timer:-$SECONDS}
+}
 
-# git settings
-ZSH_THEME_GIT_PROMPT_PREFIX="$FG[075](git branch:"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_DIRTY="$my_orange*%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="$FG[075])%{$reset_color%}"
+function precmd() {
+  if [ $timer ]; then
+    timer_show=$(($SECONDS - $timer))
+    export LAST_CMD_TIME=$(($SECONDS - $timer))
+    unset timer
+  fi
+}
 
-# primary prompt
-PROMPT='$FG[237]------------------------------------------------------------%{$reset_color%}
-$FG[032]%~\
-$(git_prompt_info)$(hg_prompt_info) \
-$FG[105]%(!.#.»)%{$reset_color%} '
+function aws_default_profile() {
+  ${AWS_DEFAULT_PROFILE}
+}
+function aws_prompt_info() {
+  case $AWS_DEFAULT_PROFILE in
+  *dev*)
+    echo %F{green}$(aws_default_profile)%f
+    ;;
+  *)
+    echo $(aws_default_profile)
+    ;;
+  esac
+}
 
-RPROMPT='<ruby:$(ruby_prompt_info)> <aws:$AWS_RPROMPT>'
-PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
+
+function render_prompt() {
+  LAST_CMD_STATUS="exit ${?} in ${LAST_CMD_TIME}s"
+cat << EOM
+%U${(l:COLUMNS:: :)LAST_CMD_STATUS}%u
+$FG[240][ ruby: $(ruby_prompt_info) | aws: ${AWS_RPROMPT} $FG[240]]
+$FG[240]$FG[032]%~$FG[105] $(git_prompt_info)$(hg_prompt_info)$ %{$reset_color%}
+EOM
+}
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
+
+PROMPT='$(render_prompt)'
+RPROMPT="${return_code}"
 
 export MANPATH="/usr/local/man:$MANPATH"
 
@@ -119,10 +136,9 @@ fi
 
 PATH="$ZTVPDIR/bin:~/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/usr/sbin:/sbin:$PATH"
 
-goat
-
 unset AWS_DEFAULT_PROFILE
 export AWS_REGION=us-east-1
+export HOMEBREW_GITHUB_API_TOKEN="83786bd0adf6fdc319c1144b9225d5de895d9ae8"
 
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
