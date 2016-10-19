@@ -1,6 +1,6 @@
 # Path to your oh-my-zsh installation.
 export PLATFORM=`uname`
-export ZTVPDIR="${HOME}/.dotfiles"
+export ZTVPDIR=`cat ${HOME}/.dotfilesdir`
 export ZPLUG_HOME="${ZTVPDIR}/zsh/zplug"
 
 read -r -d '' GOAT <<EOF
@@ -134,7 +134,7 @@ if [ -e ~/.aliases ]; then
   source ~/.aliases
 fi
 
-PATH="$ZTVPDIR/bin:~/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/usr/sbin:/sbin:$PATH"
+PATH="$ZTVPDIR/bin:~/.bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/usr/sbin:/sbin:$PATH"
 
 unset AWS_DEFAULT_PROFILE
 export AWS_REGION=us-east-1

@@ -47,7 +47,7 @@ let g:EasyMotion_do_mapping = 0
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
 
-let s:path = "~/.dotfiles"
+let s:path = system("cat ~/.dotfilesdir")
 
 set nocompatible
 filetype off
