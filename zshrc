@@ -80,6 +80,18 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 RPS1='$(vi_mode_prompt_info)'
 # source "$ZTVPDIR/tmuxinator.zsh"
 
+# hg settings
+ZSH_THEME_HG_PROMPT_PREFIX="$FG[075](hg:"
+ZSH_THEME_HG_PROMPT_SUFFIX="$FG[075])%{$reset_color%}"
+ZSH_THEME_HG_PROMPT_DIRTY="$FG[226]*%{$reset_color%}"
+ZSH_THEME_HG_PROMPT_CLEAN=""
+
+# git settings
+ZSH_THEME_GIT_PROMPT_PREFIX="$FG[075](git:"
+ZSH_THEME_GIT_PROMPT_SUFFIX="$FG[075])%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="$FG[226]*%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN=""
+
 function preexec() {
   timer=${timer:-$SECONDS}
 }
@@ -94,6 +106,9 @@ function precmd() {
 
 function aws_prompt_info() {
   case $AWS_DEFAULT_PROFILE in
+  "")
+    echo NONE
+    ;;
   *dev*)
     echo %F{green}${AWS_DEFAULT_PROFILE}%f
     ;;

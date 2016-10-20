@@ -1,0 +1,7 @@
+# This is Git's per-user configuration file.
+[include]
+  path = ~/.gitconfig.local
+[push]
+	default = simple
+[core]
+	excludesfile = ~/.gitignore_global
