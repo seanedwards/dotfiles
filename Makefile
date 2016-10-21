@@ -1,7 +1,7 @@
 CWD=$(shell pwd)
 
-install: links brew rbenv
-  echo ${CWD} > ${HOME}/.dotfilesdir
+install: links vim rbenv
+	echo ${CWD} > ${HOME}/.dotfilesdir
 
 links:
 	for f in \
@@ -16,7 +16,7 @@ links:
 		gitignore_global \
 		hgrc \
 		hgignore_global \
-		; do ln -fs ${CWD}/$$f ${HOME}/.$$f; done
+		; do ln -sfn ${CWD}/$$f ${HOME}/.$$f; done
 
 brew:
 	for p in \
@@ -36,8 +36,8 @@ brew:
 		; do brew ls --versions $$p && brew upgrade $$p || brew install $$p || true; done
 
 rbenv:
-  zsh -c 'rbenv install -s 2.3.0 && rbenv global 2.3.0'
+	zsh -c 'rbenv install -s 2.3.0 && rbenv global 2.3.0'
 
 vim:
-  vim +VundleInstall +qall
+	vim +VundleInstall +qall
 
