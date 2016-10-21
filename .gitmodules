@@ -1,12 +1,12 @@
 [submodule "tmux/tpm"]
 	path = tmux/tpm
-	url = git@github.com:tmux-plugins/tpm.git
+url=https://github.com/tmux-plugins/tpm.git
 [submodule "vim/bundle/Vundle.vim"]
 	path = vim/bundle/Vundle.vim
-	url = https://github.com/gmarik/Vundle.vim.git
+url=https://github.com/VundleVim/Vundle.vim.git
 [submodule "zsh/zplug"]
 	path = zsh/zplug
-	url = git@github.com:zplug/zplug.git
+url=https://github.com/zplug/zplug.git
 [submodule "zsh/source"]
 	path = zsh/source
-	url = git@github.com:zsh-users/zsh.git
+url=git://git.code.sf.net/p/zsh/code
