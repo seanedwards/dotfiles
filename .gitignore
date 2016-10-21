@@ -1,6 +1,9 @@
 .tags
 **/.tags
 *.swp
+zsh/*
+!zsh/source
+!zsh/zplug
 tmux/*
 !tmux/tpm
 vim/bundle/*

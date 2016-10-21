@@ -7,3 +7,6 @@
 [submodule "zsh/zplug"]
 	path = zsh/zplug
 	url = git@github.com:zplug/zplug.git
+[submodule "zsh/source"]
+	path = zsh/source
+	url = git@github.com:zsh-users/zsh.git
