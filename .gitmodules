@@ -7,6 +7,3 @@ url=https://github.com/VundleVim/Vundle.vim.git
 [submodule "zsh/zplug"]
 	path = zsh/zplug
 url=https://github.com/zplug/zplug.git
-[submodule "zsh/source"]
-	path = zsh/source
-url=git://git.code.sf.net/p/zsh/code
