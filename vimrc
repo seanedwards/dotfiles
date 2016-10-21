@@ -1,12 +1,5 @@
 let g:airline_powerline_fonts = 1
 
-"let g:easytags_async = 1
-"let g:easytags_events = ['BufWritePost']
-"set tags=./.tags;
-"let g:easytags_dynamic_files = 2
-
-let g:ycm_collect_identifiers_from_tags_files = 1
-
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
@@ -47,12 +40,10 @@ let g:EasyMotion_do_mapping = 0
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
 
-let s:path = system("cat ~/.dotfilesdir")
-
 set nocompatible
 filetype off
 
-exec "set rtp+=" . s:path . "/vim/bundle/Vundle.vim"
+set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 
@@ -90,8 +81,6 @@ Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-dispatch' "                 :: dispatch.vim: asynchronous build and test dispatcher                                                                 :: https://github.com/tpope/vim-dispatch
 Plugin 'jpalardy/vim-slime' "                 :: A vim plugin to give you some slime. (Emacs) http://technotales.wordpress.com/2007/10/03/like-slime-for-vim/         :: https://github.com/jpalardy/vim-slime
 Plugin 'thoughtbot/vim-rspec' "               :: Run Rspec specs from Vim                                                                                             :: https://github.com/thoughtbot/vim-rspec
-Plugin 'xolox/vim-easytags' "                 :: Automated tag file generation and syntax highlighting of tags in Vim                                                 :: http://peterodding.com/code/vim/easytags/
-
 " Workflow tools
 Plugin 'SirVer/ultisnips' "                   :: UltiSnips - The ultimate snippet solution for Vim.                                                                   :: https://github.com/SirVer/ultisnips
 Plugin 'honza/vim-snippets' "                 :: vim-snipmate default snippets (Previously snipmate-snippets)                                                         :: https://github.com/honza/vim-snippets
@@ -99,7 +88,6 @@ Plugin 'xolox/vim-notes' "                    :: Easy note taking in Vim        
 Plugin 'mattn/gist-vim' "                     :: vimscript for gist                                                                                                   :: https://github.com/mattn/gist-vim
 
 " Plugin 'scrooloose/syntastic' "             :: Syntax checking hacks for vim                                                                                        :: https://github.com/scrooloose/syntastic
-Plugin 'majutsushi/tagbar' "                  :: Vim plugin that displays tags in a window, ordered by scope http://majutsushi.github.com/tagbar/                     :: https://github.com/majutsushi/tagbar
 
 " Filetype plugins
 Plugin 'plasticboy/vim-markdown' "            :: Markdown Vim Mode                                                                                                    :: http://plasticboy.com/markdown-vim-mode/
