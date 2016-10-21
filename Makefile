@@ -1,5 +1,8 @@
 CWD=$(shell pwd)
 
+install: links brew rbenv
+  echo ${CWD} > ${HOME}/.dotfilesdir
+
 links:
 	for f in \
 		vimrc \
@@ -31,4 +34,10 @@ brew:
 		zsh \
 		vim \
 		; do brew ls --versions $$p && brew upgrade $$p || brew install $$p || true; done
+
+rbenv:
+  zsh -c 'rbenv install -s 2.3.0 && rbenv global 2.3.0'
+
+vim:
+  vim +VundleInstall +qall
 

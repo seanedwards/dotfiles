@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Path to your oh-my-zsh installation.
 export PLATFORM=`uname`
 export ZTVPDIR=`cat ${HOME}/.dotfilesdir`
