@@ -133,15 +133,27 @@ function aws_prompt_info() {
   esac
 }
 
+function user_prompt_info() {
+  USERCOLOR=${PROMPT_USERCOLOR:-240}
+  USERNAME=`whoami`
+  case $USERNAME in
+  root)
+    echo "%F{002}`whoami`%f"
+    ;;
+  *)
+    echo "%F{$USERCOLOR}`whoami`%f"
+    ;;
+  esac
+}
+
 
 function render_prompt() {
   LAST_CMD_STATUS="exit ${?} in ${LAST_CMD_TIME}s"
   SERVERCOLOR=${PROMPT_SERVERCOLOR:-240}
-  USERCOLOR=${PROMPT_USERCOLOR:-240}
   DIRCOLOR=${PROMPT_DIRCOLOR:-004}
 cat << EOM
 %U${(l:COLUMNS:: :)LAST_CMD_STATUS}%u
-$FG[240][ %F{$USERCOLOR}`whoami`%F{240}@%F{$SERVERCOLOR}`hostname`%F{240} | ruby: $(ruby_prompt_info) | aws: $(aws_prompt_info) $FG[240]]
+$FG[240][ $(user_prompt_info)%F{240}@%F{$SERVERCOLOR}`hostname`%F{240} | ruby: $(ruby_prompt_info) | aws: $(aws_prompt_info) $FG[240]]
 %F{$DIRCOLOR}%~ $(git_prompt_info)$(hg_prompt_info)$FG[105]$ %{$reset_color%}
 EOM
 }
