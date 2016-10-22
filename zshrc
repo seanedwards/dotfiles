@@ -136,10 +136,13 @@ function aws_prompt_info() {
 
 function render_prompt() {
   LAST_CMD_STATUS="exit ${?} in ${LAST_CMD_TIME}s"
+  SERVERCOLOR=${PROMPT_SERVERCOLOR:-240}
+  USERCOLOR=${PROMPT_USERCOLOR:-240}
+  DIRCOLOR=${PROMPT_DIRCOLOR:-004}
 cat << EOM
 %U${(l:COLUMNS:: :)LAST_CMD_STATUS}%u
-$FG[240][ ruby: $(ruby_prompt_info) | aws: $(aws_prompt_info) $FG[240]]
-$FG[240]$FG[032]%~ $(git_prompt_info)$(hg_prompt_info)$FG[105]$ %{$reset_color%}
+$FG[240][ %F{$USERCOLOR}`whoami`%F{240}@%F{$SERVERCOLOR}`hostname`%F{240} | ruby: $(ruby_prompt_info) | aws: $(aws_prompt_info) $FG[240]]
+%F{$DIRCOLOR}%~ $(git_prompt_info)$(hg_prompt_info)$FG[105]$ %{$reset_color%}
 EOM
 }
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
