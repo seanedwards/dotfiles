@@ -12,6 +12,16 @@ read -r -d '' GOAT <<EOF
    |""""""|
 EOF
 
+case "$TERM_PROGRAM" in
+DTerm)
+    # It's DTerm!
+    return 0
+    ;;
+*)
+    # It's something else!
+    ;;
+esac
+
 if [[ "$PLATFORM" -eq "Darwin" ]]
 then
   PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
@@ -44,7 +54,7 @@ DISABLE_AUTO_UPDATE="true"
 HIST_STAMPS="yyyy-mm-dd"
 
 if [[ -o login ]]; then
-  ZSH_TMUX_AUTOSTART="true"
+  ZSH_TMUX_AUTOSTART="false"
 fi
 
 source "${ZPLUG_HOME}/init.zsh"
