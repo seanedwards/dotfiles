@@ -133,6 +133,7 @@ creds = load_credentials(profile_name)
 File.write(sessions_file, YAML.dump(SESSIONS))
 
 puts set_or_unset("AWS_DEFAULT_PROFILE", profile_name)
+puts set_or_unset("AWS_PROFILE", profile_name)
 puts set_or_unset("AWS_DEFAULT_REGION", creds[:region])
 puts set_or_unset("AWS_ACCESS_KEY_ID", creds[:access_key_id])
 puts set_or_unset("AWS_SECRET_ACCESS_KEY", creds[:secret_access_key])

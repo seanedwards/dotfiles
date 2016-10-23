@@ -97,6 +97,8 @@ Plugin 'derekwyatt/vim-scala' "               :: My work on integration of Scala
 " Other plugins
 Plugin 'xolox/vim-misc' "                     :: Miscellaneous auto-load Vim scripts [for other xolox plugins]                                                        :: http://peterodding.com/code/vim/misc/
 Plugin 'mattn/webapi-vim' "                   :: vim interface to Web API http://www.vim.org/scripts/script.php?script_id=4019 [for vim-gist]                         :: https://github.com/mattn/webapi-vim
+Plugin 'michaeljsmith/vim-indent-object'
+Plugin 'tpope/vim-rsi'
 
 call vundle#end()
 filetype plugin indent on
@@ -132,6 +134,15 @@ set exrc
 set nofoldenable
 set noswapfile
 
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set nornu
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <C-n> :call NumberToggle()<cr>
 nmap <leader>bb :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
 nmap <leader>bs :CtrlPMRU<cr>
@@ -171,6 +182,11 @@ noremap <Leader>rt :call RunNearestSpec()<CR>
 noremap <Leader>rl :call RunLastSpec()<CR>
 noremap <Leader>ra :call RunAllSpecs()<CR>
 noremap <Leader>ro :Copen<CR>
+
+imap <C-i> <Esc>
+imap <C-a> <Esc>
+
+nnoremap <M-h> <Home>
 
 " Clojure mappings
 noremap <Leader>cr :Require<CR>

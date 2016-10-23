@@ -136,7 +136,7 @@ function user_prompt_info() {
   USERNAME=`whoami`
   case $USERNAME in
   root)
-    echo "%F{001}`whoami`%f"
+    echo "%F{002}`whoami`%f"
     ;;
   *)
     echo "%F{$USERCOLOR}`whoami`%f"
