@@ -24,7 +24,7 @@ esac
 
 if [[ "$PLATFORM" -eq "Darwin" ]]
 then
-  PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+  PATH="$(brew --prefix coreutils)/libexec/gnubin:/opt/chefdk/bin:$PATH"
   export M3_HOME="/usr/local"
   export ANDROID_HOME="/usr/local/opt/android-sdk"
   export ANDROID_NDK_HOME="/usr/local/opt/android-ndk"
@@ -66,8 +66,6 @@ zplug "zsh-users/zsh-syntax-highlighting", nice:10
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/mercurial", from:oh-my-zsh
 zplug "plugins/ruby", from:oh-my-zsh
-zplug "plugins/rbenv", from:oh-my-zsh
-zplug "plugins/bundler", from:oh-my-zsh
 zplug "plugins/osx", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/wd", from:oh-my-zsh
@@ -181,6 +179,7 @@ PATH="$ZTVPDIR/bin:~/.bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/usr/sbi
 unset AWS_DEFAULT_PROFILE
 export AWS_REGION=us-east-1
 export HOMEBREW_GITHUB_API_TOKEN="83786bd0adf6fdc319c1144b9225d5de895d9ae8"
+eval "$(rbenv init -)"
 
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
