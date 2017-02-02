@@ -7,3 +7,6 @@ url=https://github.com/VundleVim/Vundle.vim.git
 [submodule "zsh/zplug"]
 	path = zsh/zplug
 url=https://github.com/zplug/zplug.git
+[submodule "zsh/dircolors-solarized"]
+	path = zsh/dircolors-solarized
+	url = https://github.com/seebi/dircolors-solarized.git
