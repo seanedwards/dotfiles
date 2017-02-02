@@ -1,3 +1,7 @@
 [ui]
 ignore = ~/.hgignore
+username = Sean Edwards <sedwards@seniorlink.com>
+
+[gpg]
+key=828D4727
 

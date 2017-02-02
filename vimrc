@@ -99,6 +99,7 @@ Plugin 'xolox/vim-misc' "                     :: Miscellaneous auto-load Vim scr
 Plugin 'mattn/webapi-vim' "                   :: vim interface to Web API http://www.vim.org/scripts/script.php?script_id=4019 [for vim-gist]                         :: https://github.com/mattn/webapi-vim
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'tpope/vim-rsi'
+Plugin 'udalov/kotlin-vim'
 
 call vundle#end()
 filetype plugin indent on

@@ -144,9 +144,12 @@ function user_prompt_info() {
   esac
 }
 
+function rbenv_prompt_info() {
+  rbenv version-name || echo "system: $(ruby -v | cut -f-2 -d ' ')"
+}
 
 function render_prompt() {
-  LAST_CMD_STATUS="exit ${?} in ${LAST_CMD_TIME}s"
+  LAST_CMD_STATUS="$(date "+%Y-%m-%d %H:%M"): exit ${?} in ${LAST_CMD_TIME}s"
   SERVERCOLOR=${PROMPT_SERVERCOLOR:-240}
   DIRCOLOR=${PROMPT_DIRCOLOR:-004}
 cat << EOM
@@ -179,7 +182,18 @@ PATH="$ZTVPDIR/bin:~/.bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/usr/sbi
 unset AWS_DEFAULT_PROFILE
 export AWS_REGION=us-east-1
 export HOMEBREW_GITHUB_API_TOKEN="83786bd0adf6fdc319c1144b9225d5de895d9ae8"
-eval "$(rbenv init -)"
+eval "$(rbenv init --no-rehash - zsh)"
+eval "$(dircolors ${ZTVPDIR}/zsh/dircolors-solarized/dircolors.ansi-dark)"
+
+local GPG_ENV=$HOME/.gnupg/gpg-agent.env
+[ -f $GPG_ENV ] && source $GPG_ENV
+if [ -S "${GPG_AGENT_INFO%%:*}" ]; then
+  export GPG_AGENT_INFO
+  export SSH_AUTH_SOCK
+  export SSH_AGENT_PID
+else
+  eval $( /usr/bin/env gpg-agent --quiet --daemon --enable-ssh-support --write-env-file ${GPG_ENV} 2> /dev/null )
+fi
 
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
