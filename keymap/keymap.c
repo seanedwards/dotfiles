@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
                                                _______, _______,
                                                         _______,
-                                      _______, _______, _______,
+                                      _______, KC_LOWER, KC_MINS,
 
   // right hand
   _______, _______, _______, _______, KC_MINS, KC_EQL,  KC_DEL,
@@ -90,26 +90,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, KC_1,    KC_2,    KC_3,    KC_BSLS, _______,
   /***************/ KC_0,    KC_0,    KC_DOT,  _______, _______,
 
-  _______, _______,
-  _______,
-  _______, _______, _______
+  KC_TRNS, KC_TRNS,
+  KC_TRNS,
+  KC_TRNS, KC_TRNS, KC_MINUS
 ),
 
 [L_RAISE] = LAYOUT_nix( // right fn
   // left hand
-  KC_GRAVE, KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5, _______,
-  KC_TRNS, KC_F6 , KC_F7 , KC_F8 , KC_F9 , KC_F10, _______,
+  KC_GRAVE, KC_F1,  KC_F2,  KC_F3, KC_F4,  KC_F5, _______,
+  KC_TRNS,  KC_F6,  KC_F7,  KC_F8, KC_F9,  KC_F10, _______,
   KC_TRNS, KC_F11, KC_F12, KC_F13, KC_F14, KC_F15,
   KC_TRNS, KC_F16, KC_F17, KC_F18, KC_F19, KC_F20, _______,
   KC_RCTL, _______, _______, _______, KC_RALT,
 
                                                _______, _______,
                                                         _______,
-                                      _______, _______, _______,
+                                      KC_LGUI, _______, _______,
   // right hand
-  _______, _______ , _______ , _______, _______, _______, KC_DEL,
+  _______, _______ , _______ , _______, KC_MINS,  KC_EQL, KC_DEL,
   _______, _______ , _______ , _______, _______, _______, _______,
-  /*    , */KC_LEFT, KC_DOWN , KC_UP , KC_RGHT, _______, _______,
+  /*    , */KC_LEFT, KC_DOWN ,   KC_UP, KC_RGHT, _______, _______,
   _______, _______ , _______ , _______, _______, _______, _______,
   /*    ,         , */_______, _______, _______, _______, _______,
 
