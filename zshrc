@@ -200,3 +200,6 @@ source "$HOME/.asdf/asdf.sh"
 
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+echo $GOAT
+

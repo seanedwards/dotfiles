@@ -1,9 +1,9 @@
 {
   "codeLens.enable": true,
   "languageserver": {
-     "elixirLS": {
+    "elixirLS": {
       "command": "~/.vim/bundle/elixir-ls/rel/language_server.sh",
       "filetypes": ["elixir", "eelixir"]
-     }
+    }
   }
 }

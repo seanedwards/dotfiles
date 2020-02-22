@@ -28,60 +28,50 @@ call plug#begin('~/.vim/bundle')
   Plug 'neoclide/coc.nvim', {'branch': 'release'} " :: CoC, the intellisense plugin for vim
 
   " Make vim look cool
-  Plug 'bling/vim-airline' "                  :: lean & mean status/tabline for vim that's light as air                                                               :: https://github.com/bling/vim-airline
-  Plug 'vim-airline/vim-airline-themes' "                  :: lean & mean status/tabline for vim that's light as air                                                               :: https://github.com/bling/vim-airline
-  Plug 'flazz/vim-colorschemes' "             :: one colorscheme pack to rule them all!                                                                               :: https://github.com/flazz/vim-colorschemes
+  "Plug 'bling/vim-airline' "                  :: lean & mean status/tabline for vim that's light as air                                                               :: https://github.com/bling/vim-airline
+  "Plug 'vim-airline/vim-airline-themes' "                  :: lean & mean status/tabline for vim that's light as air                                                               :: https://github.com/bling/vim-airline
+  "Plug 'flazz/vim-colorschemes' "             :: one colorscheme pack to rule them all!                                                                               :: https://github.com/flazz/vim-colorschemes
   Plug 'altercation/vim-colors-solarized'
 
   " Make vim work well with tmux
-  "Plug 'tmux-plugins/vim-tmux' "              :: vim plugin for tmux.conf                                                                                             :: https://github.com/tmux-plugins/vim-tmux
-  "Plug 'tmux-plugins/vim-tmux-focus-events' " :: Make terminal vim and tmux work better together. (required for vim-gitgutter and vim-fugitive focus events)          :: https://github.com/tmux-plugins/vim-tmux-focus-events
-  "Plug 'christoomey/vim-tmux-navigator' "     :: Seamless navigation between tmux panes and vim splits                                                                :: https://github.com/christoomey/vim-tmux-navigator
-  Plug 'edkolev/tmuxline.vim' "               :: Simple tmux statusline generator with support for powerline symbols and statusline / airline / lightline integration :: https://github.com/edkolev/tmuxline.vim
+  "Plug 'edkolev/tmuxline.vim' "               :: Simple tmux statusline generator with support for powerline symbols and statusline / airline / lightline integration :: https://github.com/edkolev/tmuxline.vim
 
   " Make vim work with git
   Plug 'airblade/vim-gitgutter' "             :: A Vim plugin which shows a git diff in the gutter (sign column) and stages/reverts hunks.                            :: https://github.com/airblade/vim-gitgutter
   Plug 'tpope/vim-fugitive' "                 :: fugitive.vim: a Git wrapper so awesome, it should be illegal                                                         :: https://github.com/tpope/vim-fugitive
 
   " Motion/edit/navigation tools
-  Plug 'scrooloose/nerdtree' "                :: A tree explorer plugin for vim.                                                                                      :: https://github.com/scrooloose/nerdtree
-  Plug 'Xuyuanp/nerdtree-git-plugin' "        :: A plugin of NERDTree showing git status                                                                              :: https://github.com/Xuyuanp/nerdtree-git-plugin
-  Plug 'kien/ctrlp.vim' "                     :: Fuzzy file, buffer, mru, tag, etc finder.                                                                            :: http://kien.github.com/ctrlp.vim
-  Plug 'Lokaltog/vim-easymotion' "            :: Vim motions on speed!                                                                                                :: https://github.com/easymotion/vim-easymotion
-  Plug 'godlygeek/tabular' "                  :: Vim script for text filtering and alignment                                                                          :: https://github.com/godlygeek/tabular
-  Plug 'tpope/vim-repeat' "                   :: repeat.vim: enable repeating supported plugin maps with '.'                                                          :: https://github.com/tpope/vim-repeat
-  Plug 'tpope/vim-commentary' "               :: commentary.vim: comment stuff out                                                                                    :: https://github.com/tpope/vim-commentary
+  Plug 'scrooloose/nerdtree'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'kien/ctrlp.vim'
+  Plug 'Lokaltog/vim-easymotion'
+  Plug 'godlygeek/tabular'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-sensible'
-  "Plug 'Valloric/YouCompleteMe' "             :: A code-completion engine for Vim http://valloric.github.io/YouCompleteMe/                                            :: https://github.com/Valloric/YouCompleteMe
 
   " Compile/test/shell tools
-  Plug 'tpope/vim-dispatch' "                 :: dispatch.vim: asynchronous build and test dispatcher                                                                 :: https://github.com/tpope/vim-dispatch
-  Plug 'jpalardy/vim-slime' "                 :: A vim plugin to give you some slime. (Emacs) http://technotales.wordpress.com/2007/10/03/like-slime-for-vim/         :: https://github.com/jpalardy/vim-slime
-  Plug 'thoughtbot/vim-rspec' "               :: Run Rspec specs from Vim                                                                                             :: https://github.com/thoughtbot/vim-rspec
+  Plug 'tpope/vim-dispatch'
+
   " Workflow tools
-  Plug 'SirVer/ultisnips' "                   :: UltiSnips - The ultimate snippet solution for Vim.                                                                   :: https://github.com/SirVer/ultisnips
+  Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets' "                 :: vim-snipmate default snippets (Previously snipmate-snippets)                                                         :: https://github.com/honza/vim-snippets
-  Plug 'xolox/vim-notes' "                    :: Easy note taking in Vim                                                                                              :: http://peterodding.com/code/vim/notes/
   Plug 'mattn/gist-vim' "                     :: vimscript for gist                                                                                                   :: https://github.com/mattn/gist-vim
 
-  " Plug 'scrooloose/syntastic' "             :: Syntax checking hacks for vim                                                                                        :: https://github.com/scrooloose/syntastic
-
   " Filetype plugins
-  Plug 'plasticboy/vim-markdown' "            :: Markdown Vim Mode                                                                                                    :: http://plasticboy.com/markdown-vim-mode/
-  Plug 'tpope/vim-liquid' "                   :: Vim Liquid runtime files with Jekyll enhancements                                                                    :: https://github.com/tpope/vim-liquid
-  "Plug 'derekwyatt/vim-scala' "               :: My work on integration of Scala into Vim - not a ton here, but useful for me. http://derekwyatt.org                  :: https://github.com/derekwyatt/vim-scala
-  Plug 'elixir-editors/vim-elixir' "          :: Elixir support                                                                                                       :: https://github.com/elixir-editors/vim-elixir
+  Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
+  Plug 'elixir-editors/vim-elixir', {'for': 'elixir'}
+  Plug 'mboughaba/i3config.vim', {'for': 'i3config'}
+  Plug 'JakeBecker/elixir-ls', {'for': 'elixir', 'do': 'mix deps.get && mix compile && mix elixir_ls.release -o ./rel'}
 
   " Other plugins
-  Plug 'xolox/vim-misc' "                     :: Miscellaneous auto-load Vim scripts [for other xolox plugins]                                                        :: http://peterodding.com/code/vim/misc/
-  Plug 'mattn/webapi-vim' "                   :: vim interface to Web API http://www.vim.org/scripts/script.php?script_id=4019 [for vim-gist]                         :: https://github.com/mattn/webapi-vim
-  Plug 'michaeljsmith/vim-indent-object'
+  Plug 'xolox/vim-misc'
+  "Plug 'mattn/webapi-vim'
+  "Plug 'michaeljsmith/vim-indent-object'
   Plug 'tpope/vim-rsi'
-  Plug 'udalov/kotlin-vim'
+  Plug 'udalov/kotlin-vim', {'for': 'kotlin'}
   Plug 'ntenczar/todo.vim'
-
-  Plug 'JakeBecker/elixir-ls', {'do': 'mix deps.get && mix compile && mix elixir_ls.release -o ./rel'}
 
 call plug#end()
 
@@ -125,17 +115,7 @@ nnoremap <leader>sw bve
 vnoremap <leader>S y:execute @@<cr>
 nnoremap <leader>S ^vg_y:execute @@<cr>
 
-nmap <leader>tm :!t mentions<cr>
-nmap <leader>tt :!t timeline<cr>
-
 cmap w!! w !sudo tee % >/dev/null
-
-" RSpec.vim mappings
-noremap <Leader>rf :call RunCurrentSpecFile()<CR>
-noremap <Leader>rt :call RunNearestSpec()<CR>
-noremap <Leader>rl :call RunLastSpec()<CR>
-noremap <Leader>ra :call RunAllSpecs()<CR>
-noremap <Leader>ro :Copen<CR>
 
 imap <C-i> <Esc>
 imap <C-a> <Esc>
@@ -172,5 +152,4 @@ autocmd StdinReadPre * let s:std_in=1
 " Screen settings
 let g:slime_target = 'tmux'
 let g:slime_default_config = {"socket_name": "default", "target_pane": "2"}
-
 

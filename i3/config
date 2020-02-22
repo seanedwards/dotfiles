@@ -256,4 +256,7 @@ bindsym $mod+Shift+Escape exec --no-startup-id xset s activate
 bindsym $mod+Shift+grave exec --no-startup-id xset s activate
 exec_always xset s 900
 exec_always --no-startup-id xss-lock -- i3lock-pixelated
+exec_always --no-startup-id unclutter
+
+# vim:filetype=i3config
 
