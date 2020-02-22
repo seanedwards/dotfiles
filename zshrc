@@ -24,7 +24,7 @@ esac
 
 if [[ "$PLATFORM" -eq "Darwin" ]]
 then
-  PATH="$(brew --prefix coreutils)/libexec/gnubin:/opt/chefdk/bin:$PATH"
+  #PATH="$(brew --prefix coreutils)/libexec/gnubin:/opt/chefdk/bin:$PATH"
   export M3_HOME="/usr/local"
   export ANDROID_HOME="/usr/local/opt/android-sdk"
   export ANDROID_NDK_HOME="/usr/local/opt/android-ndk"
@@ -145,7 +145,8 @@ function user_prompt_info() {
 }
 
 function rbenv_prompt_info() {
-  rbenv version-name || echo "system: $(ruby -v | cut -f-2 -d ' ')"
+  #rbenv version-name ||
+  echo "system: $(ruby -v | cut -f-2 -d ' ')"
 }
 
 function render_prompt() {
@@ -177,12 +178,12 @@ if [ -e ~/.aliases ]; then
   source ~/.aliases
 fi
 
-PATH="$ZTVPDIR/bin:~/.bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/usr/sbin:/sbin:$PATH"
+PATH="$ZTVPDIR/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/usr/sbin:/sbin:$PATH"
 
 unset AWS_DEFAULT_PROFILE
 export AWS_REGION=us-east-1
 export HOMEBREW_GITHUB_API_TOKEN="83786bd0adf6fdc319c1144b9225d5de895d9ae8"
-eval "$(rbenv init --no-rehash - zsh)"
+#eval "$(rbenv init --no-rehash - zsh)"
 eval "$(dircolors ${ZTVPDIR}/zsh/dircolors-solarized/dircolors.ansi-dark)"
 
 local GPG_ENV=$HOME/.gnupg/gpg-agent.env
@@ -194,6 +195,8 @@ if [ -S "${GPG_AGENT_INFO%%:*}" ]; then
 else
   eval $( /usr/bin/env gpg-agent --quiet --daemon --enable-ssh-support --write-env-file ${GPG_ENV} 2> /dev/null )
 fi
+
+source "$HOME/.asdf/asdf.sh"
 
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local

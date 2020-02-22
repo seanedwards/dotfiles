@@ -20,7 +20,7 @@ function awsp {
   $(aws-profile $1)
 }
 
-alias ls='gls -lhFAH --color=force'
+alias ls='ls -alh --color=tty'
 alias map='xargs -L1'
 alias tweet='t update'
 alias tweets='t timeline | less'
