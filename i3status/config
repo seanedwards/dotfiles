@@ -1,0 +1,81 @@
+general {
+  output_format = "i3bar"
+  colors = true
+  color_good = "#93a1a1"
+  color_degraded = "#b58900"
+  color_bad = "#dc322f"
+  interval = 1
+}
+
+#order += "read_file pubip"
+order += "battery all"
+order += "ethernet wg0"
+order += "wireless _first_"
+order += "ethernet _first_"
+order += "disk /"
+order += "memory"
+order += "cpu_usage"
+order += "volume master"
+order += "tztime local"
+
+disk "/" {
+  format = "D: %free of %total (%percentage_free)"
+  low_threshold = "10"
+  threshold_type = "percentage_free"
+}
+
+tztime local {
+  format = "%Y-%m-%d %H:%M:%S"
+}
+
+cpu_usage {
+  format = "C: %usage"
+
+  degraded_threshold = 50
+  max_threshold = 90
+}
+
+memory {
+  format = "M: %free of %total (%percentage_used)"
+  memory_used_method = classical
+  threshold_degraded = 25%
+  threshold_critical = 5%
+}
+
+wireless _first_ {
+  format_up = "W: %ip (%quality at %essid)"
+  format_down = "W: down"
+}
+
+ethernet _first_ {
+  format_up = "E: %ip (%speed)"
+  format_down = "E: down"
+}
+
+ethernet wg0 {
+  format_up = "VPN: %ip"
+  format_down = "VPN: down"
+}
+
+volume master {
+  format = "♪: %volume"
+  format_muted = "♪: muted (%volume)"
+  device = "pulse:1"
+}
+
+battery all {
+  format = "B: %percentage %status : %remaining (%consumption)"
+  format_down = "B: none"
+  status_chr = "⚡"
+  status_bat = "🔋"
+  status_full = "☻"
+  low_threshold = "20"
+  threshold_type = "time"
+}
+
+#read_file pubip {
+#  format = "IP: %content"
+#  format_bad = ""
+#  path = "/run/pubip.txt"
+#}
+

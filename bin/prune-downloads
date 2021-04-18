@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+find "$HOME/Downloads/" -maxdepth 1 -mtime +30 -exec rm -rf {} \;
+

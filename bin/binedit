@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+vim "$HOME/dotfiles/bin/$1"
+chmod +x "$HOME/dotfiles/bin/$1"
+

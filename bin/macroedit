@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+MACRO="$HOME/dotfiles/bin/macros/$1"
+
+vim "$MACRO"
+chmod +x "$MACRO"
+

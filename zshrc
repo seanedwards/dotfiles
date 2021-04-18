@@ -2,7 +2,6 @@
 
 # Path to your oh-my-zsh installation.
 export PLATFORM=`uname`
-export ZTVPDIR=`cat ${HOME}/.dotfilesdir`
 export ZPLUG_HOME="${ZTVPDIR}/zsh/zplug"
 
 read -r -d '' GOAT <<EOF
@@ -164,8 +163,6 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 PROMPT='$(render_prompt)'
 RPROMPT="${return_code}"
 
-export MANPATH="/usr/local/man:$MANPATH"
-
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
@@ -177,8 +174,6 @@ source "$ZTVPDIR/aliases"
 if [ -e ~/.aliases ]; then
   source ~/.aliases
 fi
-
-PATH="$ZTVPDIR/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/usr/sbin:/sbin:$PATH"
 
 unset AWS_DEFAULT_PROFILE
 export AWS_REGION=us-east-1
@@ -196,7 +191,12 @@ else
   eval $( /usr/bin/env gpg-agent --quiet --daemon --enable-ssh-support --write-env-file ${GPG_ENV} 2> /dev/null )
 fi
 
+eval "$(direnv hook zsh)"
+
 source "$HOME/.asdf/asdf.sh"
+if [ -e '$HOME/.nix-profile/etc/profile.d/nix.sh' ]; then
+  . '$HOME/.nix-profile/etc/profile.d/nix.sh'
+fi
 
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local

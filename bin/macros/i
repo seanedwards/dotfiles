@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+~/Work/tmp/ohno/presign.sh $(xclip -selection c -o).csv | xclip -selection c

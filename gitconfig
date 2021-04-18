@@ -4,17 +4,11 @@
 [push]
 	default = simple
 [core]
-	excludesfile = /Users/seanedwards/.gitignore_global
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Users/seanedwards/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+	excludesfile = ~/.gitignore_global
 [user]
-	signingkey = 828D4727
-	name = Sean Edwards
+  #signingkey = 828D4727
+  name = Sean Edwards
 	email = stedwards87@gmail.com
 [commit]
-	gpgsign = true
-	template = /Users/seanedwards/.stCommitMsg
+  #gpgsign = true
+  #template = /Users/seanedwards/.stCommitMsg

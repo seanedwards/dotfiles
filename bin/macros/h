@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+ha-hook heat_toggle
+

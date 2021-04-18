@@ -26,6 +26,7 @@ filetype off
 
 call plug#begin('~/.vim/bundle')
   Plug 'neoclide/coc.nvim', {'branch': 'release'} " :: CoC, the intellisense plugin for vim
+  Plug 'xolox/vim-notes'
 
   " Make vim look cool
   "Plug 'bling/vim-airline' "                  :: lean & mean status/tabline for vim that's light as air                                                               :: https://github.com/bling/vim-airline
@@ -64,13 +65,14 @@ call plug#begin('~/.vim/bundle')
   Plug 'elixir-editors/vim-elixir', {'for': 'elixir'}
   Plug 'mboughaba/i3config.vim', {'for': 'i3config'}
   Plug 'JakeBecker/elixir-ls', {'for': 'elixir', 'do': 'mix deps.get && mix compile && mix elixir_ls.release -o ./rel'}
+  Plug 'udalov/kotlin-vim', {'for': 'kotlin'}
+  Plug 'LnL7/vim-nix', {'for': 'nix'}
 
   " Other plugins
   Plug 'xolox/vim-misc'
   "Plug 'mattn/webapi-vim'
   "Plug 'michaeljsmith/vim-indent-object'
   Plug 'tpope/vim-rsi'
-  Plug 'udalov/kotlin-vim', {'for': 'kotlin'}
   Plug 'ntenczar/todo.vim'
 
 call plug#end()
@@ -120,14 +122,25 @@ cmap w!! w !sudo tee % >/dev/null
 imap <C-i> <Esc>
 imap <C-a> <Esc>
 
+imap <C-j> <Esc>o
+imap <C-k> <Esc>O
+
 nnoremap <M-h> <Home>
+
+function! SetExecutableBit()
+  let fname = expand("%:p")
+  checktime
+  execute "au FileChangedShell " . fname . " :echo"
+  silent !chmod a+x %
+  checktime
+  execute "au! FileChangedShell " . fname
+endfunction
+command! Xbit call SetExecutableBit()
 
 let g:rspec_command = "Dispatch rspec {spec}"
 
 command! -nargs=? -complete=shellcmd Curl :r! curl -s <f-args>
 command! -nargs=1 Pwgen :r! pwgen <f-args> 1
-
-vmap <Return> di
 
 autocmd QuickFixCmdPost *grep* cwindow
 

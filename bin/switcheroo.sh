@@ -7,14 +7,14 @@ focused_app_command=$(ps -o comm= --pid $focused_app_pid)
 
 window_name=$(xdotool getactivewindow getwindowname)
 grep_for_vim=' - (view|n?vim?x?)(diff)?$'
+grep_for_path=''
 
-echo $window_name
-
-if echo "$window_name" | grep -iqE -e "$grep_for_vim" && echo $focused_app_command | grep urxvt; then
+if echo "$window_name" | grep -iqE -e "$grep_for_vim" && echo $focused_app_command | grep alacritty; then
   echo "xdotool the ol vim switcheroo"
   i3-msg mode "switcheroo"
   xdotool key --window $focused_window "ctrl+$1"
   i3-msg mode "default"
+#elif echo $focus_app_command | grep urxvt; then
 else
   echo "doin that i3 thang"
   case "$1" in

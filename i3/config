@@ -1,4 +1,6 @@
 # vim: filetype=i3config
+set $dotfiles ~/dotfiles
+
 set_from_resource $base03 i3wm.color8 #002b36
 set_from_resource $base02 i3wm.color0 #073642
 set_from_resource $base01 i3wm.color10 #586e75
@@ -29,7 +31,7 @@ focus_wrapping no
 
 gaps inner 4
 gaps outer 2
-set $term urxvt
+set $term alacritty
 set $webbrowser firefox
 set $filebrowser ranger
 set $calculator gnome-calculator
@@ -48,12 +50,12 @@ for_window [instance="dropdown_dropdowncalc"] border pixel 2
 for_window [instance="dropdown_*"] move position center
 
 # #---Calculator---# #
-bindsym $mod+c exec --no-startup-id "urxvt -title calculator -e irb"
-for_window [instance="urxvt" title="calculator"] floating enable
-for_window [instance="urxvt" title="calculator"] move scratchpad
-for_window [instance="urxvt" title="calculator"] sticky enable
-for_window [instance="urxvt" title="calculator"] scratchpad show
-for_window [instance="urxvt" title="calculator"] focus
+bindsym $mod+c exec --no-startup-id "$term -e iex"
+for_window [instance="alacritty" title="calculator"] floating enable
+for_window [instance="alacritty" title="calculator"] move scratchpad
+for_window [instance="alacritty" title="calculator"] sticky enable
+for_window [instance="alacritty" title="calculator"] scratchpad show
+for_window [instance="alacritty" title="calculator"] focus
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -201,17 +203,51 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 bindsym $mod+n exec --no-startup-id $term
 bindsym $mod+b exec --no-startup-id $webbrowser
+bindsym $mod+i exec --no-startup-id $term -e vim -c ":Note"
 bindsym $mod+o exec "$term -e $filebrowser"
+bindsym $mod+z exec "$dotfiles/bin/ha-hook studio_toggle"
 bindsym $mod+Shift+o exec "$term -e sudo $filebrowser"
 bindsym $mod+space exec $rofi -show run -pid "${XDG_RUNTIME_DIR}/rofi.pid" -sidebar-mode
+bindsym $mod+v exec "$rofi -modi clipboard:greenclip\ print -show clipboard -run-command '{cmd}'"
 
 bindsym $mod+Shift+2 exec --no-startup-id $flameshot full --clipboard --path ~/Screenshots
 bindsym $mod+Shift+3 exec --no-startup-id $flameshot screen --clipboard --path ~/Screenshots
-bindsym $mod+Shift+4 exec --no-startup-id $flameshot gui --path ~/Screenshots
+bindsym $mod+Shift+s exec --no-startup-id $flameshot gui --path ~/Screenshots
 
 mode "switcheroo" {
   # Disable all i3 keybindings temporarilly
   bindsym $mod+Escape mode "default"
+}
+
+bindsym $mod+g mode "gmode"
+mode "gmode" {
+  bindsym Escape mode "default"
+  bindsym a exec --no-startup-id "$dotfiles/bin/macros/a > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym b exec --no-startup-id "$dotfiles/bin/macros/b > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym c exec --no-startup-id "$dotfiles/bin/macros/c > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym d exec --no-startup-id "$dotfiles/bin/macros/d > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym e exec --no-startup-id "$dotfiles/bin/macros/e > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym f exec --no-startup-id "$dotfiles/bin/macros/f > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym g exec --no-startup-id "$dotfiles/bin/macros/g > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym h exec --no-startup-id "$dotfiles/bin/macros/h > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym i exec --no-startup-id "$dotfiles/bin/macros/i > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym j exec --no-startup-id "$dotfiles/bin/macros/j > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym k exec --no-startup-id "$dotfiles/bin/macros/k > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym l exec --no-startup-id "$dotfiles/bin/macros/l > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym m exec --no-startup-id "$dotfiles/bin/macros/m > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym n exec --no-startup-id "$dotfiles/bin/macros/n > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym o exec --no-startup-id "$dotfiles/bin/macros/o > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym p exec --no-startup-id "$dotfiles/bin/macros/p > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym q exec --no-startup-id "$dotfiles/bin/macros/q > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym r exec --no-startup-id "$dotfiles/bin/macros/r > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym s exec --no-startup-id "$dotfiles/bin/macros/s > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym t exec --no-startup-id "$dotfiles/bin/macros/t > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym u exec --no-startup-id "$dotfiles/bin/macros/u > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym v exec --no-startup-id "$dotfiles/bin/macros/v > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym w exec --no-startup-id "$dotfiles/bin/macros/w > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym x exec --no-startup-id "$dotfiles/bin/macros/x > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym y exec --no-startup-id "$dotfiles/bin/macros/y > /tmp/macro-stdout 2>&1; i3-msg mode default"
+  bindsym z exec --no-startup-id "$dotfiles/bin/macros/z > /tmp/macro-stdout 2>&1; i3-msg mode default"
 }
 
 
@@ -250,14 +286,14 @@ client.placeholder      $red    $base00  $base03 $base02    $red
 
 client.background       $base02
 
-#exec --no-startup-id dunst
+exec --no-startup-id dunst
 
 bindsym $mod+Shift+Escape exec --no-startup-id xset s activate
 bindsym $mod+Shift+grave exec --no-startup-id xset s activate
 exec_always xset s 900
 exec_always --no-startup-id xss-lock -- i3lock-pixelated
 exec_always --no-startup-id unclutter
-exec_always --no-startup-id feh --bg-scale ~/dotfiles/background.jpg
+exec_always --no-startup-id feh --bg-scale $dotfiles/background.jpg
 
 # vim:filetype=i3config
 

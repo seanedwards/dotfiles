@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+echo $PATH
+ha-hook studio_toggle
+
+

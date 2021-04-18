@@ -18,8 +18,10 @@
 *.cursorColor: #93a1a1
 *.foreground: #839496
 
-URxvt.font: xft:Inconsolata:size=9,xft:NotoSans:size=9,xft:Unifont:pizelsize=9
-URxvt.iso14755: true
+URxvt.font: xft:Inconsolata:size=11,xft:NotoSans:size=9
+!URxvt.font: xft:Unifont:pizelsize=9
+URxvt.iso14755: false
+URxvt.iso14755_52: false
 URxvt.keyboard-select.clipboard: true
 URxvt.keysym.C-0: font-size:reset
 URxvt.keysym.C-equal: font-size:increase

@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+dir = ARGV.pop
+
+focused_window=`xdotool getwindowfocus`
+focused_app_pid=`xprop -id #{focused_window} | grep '_NET_WM_PID' | grep -oE '[[:digit:]]*$'`
+focused_app_command=`ps -o comm= --pid #{focused_app_pid}`
+
+window_name=`xdotool getactivewindow getwindowname`
+grep_for_vim=' - (view|n?vim?x?)(diff)?$'
+grep_for_path=''
+
+is_vim = / - (view|n?vim?x?)(diff)?$/.match?(window_name)
+is_term = /alacritty/.match?(focused_app_command)
+
+def direction_of(d)
+  case d
+  when "h"
+    "left"
+  when "j"
+    "down"
+  when "k"
+    "up"
+  when "l"
+    "right"
+  end
+end
+
+if is_vim and is_term
+  `i3-msg mode "switcheroo"`
+  `xdotool key --window $focused_window "ctrl+#{dir}"`
+  `i3-msg mode "default"`
+#elif echo $focus_app_command | grep urxvt; then
+else
+  `i3-msg focus #{direction_of(dir)}`
+end
+

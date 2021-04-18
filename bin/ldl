@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+echo "$HOME/Downloads/$(\ls -t ~/Downloads | head -n 1)"
+
